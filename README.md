@@ -1,4 +1,4 @@
-# lostleaf
+# Lost Leaf
 A Casual Android game
 
 ![Screenshot](media/graph.jpg)
