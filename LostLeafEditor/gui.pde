@@ -14,47 +14,39 @@
  * =========================================================
  */
 
-public void buttonRock_click(GButton source, GEvent event) { //_CODE_:buttonRock:476024:
+public void buttonRock_click(GButton source, GEvent event) { //_CODE_:buttonRock:923412:
   rocks.add(new Rock(pos.copy()));
-} //_CODE_:buttonRock:476024:
+} //_CODE_:buttonRock:923412:
 
-public void buttonTrunk_click(GButton source, GEvent event) { //_CODE_:buttonTrunk:685286:
+public void buttonTrunk_click(GButton source, GEvent event) { //_CODE_:buttonTrunk:360389:
   trunks.add(new Trunk(pos.copy()));
-} //_CODE_:buttonTrunk:685286:
+} //_CODE_:buttonTrunk:360389:
 
-public void buttonFlow_click(GButton source, GEvent event) { //_CODE_:buttonFlow:325750:
+public void buttonFlow_click(GButton source, GEvent event) { //_CODE_:buttonFlow:934774:
   flows.add(new Flow(pos.copy()));
-} //_CODE_:buttonFlow:325750:
+} //_CODE_:buttonFlow:934774:
 
-public void buttonWhirl_click(GButton source, GEvent event) { //_CODE_:buttonWhirl:419071:
+public void buttonWhirl_click(GButton source, GEvent event) { //_CODE_:buttonWhirl:202466:
   whirls.add(new Whirl(pos.copy()));
-} //_CODE_:buttonWhirl:419071:
+} //_CODE_:buttonWhirl:202466:
 
-public void buttonLeaf_click(GButton source, GEvent event) { //_CODE_:buttonLeaf:551654:
+public void buttonLeaf_click(GButton source, GEvent event) { //_CODE_:buttonLeaf:892772:
   leafs.add(new Leaf(pos.copy()));  
-} //_CODE_:buttonLeaf:551654:
+} //_CODE_:buttonLeaf:892772:
 
-public void buttonExit_click(GButton source, GEvent event) { //_CODE_:buttonExit:207421:
+public void buttonExit_click(GButton source, GEvent event) { //_CODE_:buttonExit:428542:
   exits.add(new Exit(pos.copy()));
-} //_CODE_:buttonExit:207421:
+} //_CODE_:buttonExit:428542:
 
-public void buttonStar_click(GButton source, GEvent event) { //_CODE_:buttonStar:243795:
+public void buttonStar_click(GButton source, GEvent event) { //_CODE_:buttonStar:817049:
   stars.add(new Star(pos.copy()));
-} //_CODE_:buttonStar:243795:
+} //_CODE_:buttonStar:817049:
 
-public void buttonKiller_click(GButton source, GEvent event) { //_CODE_:buttonKiller:365654:
+public void buttonKiller_click(GButton source, GEvent event) { //_CODE_:buttonKiller:716442:
   killers.add(new Killer(pos.copy()));
-} //_CODE_:buttonKiller:365654:
+} //_CODE_:buttonKiller:716442:
 
-public void buttonLoad_click(GButton source, GEvent event) { //_CODE_:buttonLoad:940379:
-  loadLevel(openDialog("Load Level"));
-} //_CODE_:buttonLoad:940379:
-
-public void buttonSaveAs_click(GButton source, GEvent event) { //_CODE_:buttonSaveAs:356994:
-  saveLevel(saveDialog("Save Level"));
-} //_CODE_:buttonSaveAs:356994:
-
-public void textX_change(GTextField source, GEvent event) { //_CODE_:textX:556994:
+public void textX_change(GTextField source, GEvent event) { //_CODE_:textX:693334:
   int x = strToInt(source.getText());
   if(whirl != null) whirl.pos.x = x;
   else if(flow != null) flow.pos.x = x;
@@ -64,9 +56,9 @@ public void textX_change(GTextField source, GEvent event) { //_CODE_:textX:55699
   else if(exit != null) exit.pos.x = x;
   else if(star != null) star.pos.x = x;
   else if(killer != null) killer.pos.x = x;
-} //_CODE_:textX:556994:
+} //_CODE_:textX:693334:
 
-public void textY_change(GTextField source, GEvent event) { //_CODE_:textY:996725:
+public void textY_change(GTextField source, GEvent event) { //_CODE_:textY:322263:
   int y = strToInt(source.getText());
   if(whirl != null) whirl.pos.y = y;
   else if(flow != null) flow.pos.y = y;
@@ -76,26 +68,26 @@ public void textY_change(GTextField source, GEvent event) { //_CODE_:textY:99672
   else if(exit != null) exit.pos.y = y;
   else if(star != null) star.pos.y = y;
   else if(killer != null) killer.pos.y = y;
-} //_CODE_:textY:996725:
+} //_CODE_:textY:322263:
 
-public void textFX_change(GTextField source, GEvent event) { //_CODE_:textFX:690458:
+public void textFX_change(GTextField source, GEvent event) { //_CODE_:textFX:810412:
   int x = strToInt(source.getText());
   if(flow != null) flow.flow.x = x;
   else if(whirl != null) whirl.flow = x;
-} //_CODE_:textFX:690458:
+} //_CODE_:textFX:810412:
 
-public void textFY_change(GTextField source, GEvent event) { //_CODE_:textFY:460761:
+public void textFY_change(GTextField source, GEvent event) { //_CODE_:textFY:789509:
   if(flow != null) flow.flow.y = strToInt(source.getText());
-} //_CODE_:textFY:460761:
+} //_CODE_:textFY:789509:
 
-public void textRange_change(GTextField source, GEvent event) { //_CODE_:textRange:992690:
+public void textRange_change(GTextField source, GEvent event) { //_CODE_:textRange:551357:
   int x = strToInt(source.getText());
   if(whirl != null) whirl.range = x;
   else if(flow != null) flow.range = x;
   else if(exit != null) exit.range = x;
-} //_CODE_:textRange:992690:
+} //_CODE_:textRange:551357:
 
-public void textVX_change(GTextField source, GEvent event) { //_CODE_:textVX:853742:
+public void textVX_change(GTextField source, GEvent event) { //_CODE_:textVX:735220:
   int x = strToInt(source.getText());
   if(whirl != null) whirl.vel.x = x;
   else if(flow != null) flow.vel.x = x;
@@ -103,9 +95,9 @@ public void textVX_change(GTextField source, GEvent event) { //_CODE_:textVX:853
   else if(trunk != null) trunk.vel.x = x;
   else if(star != null) star.vel.x = x;
   else if(killer != null) killer.vel.x = x;
-} //_CODE_:textVX:853742:
+} //_CODE_:textVX:735220:
 
-public void textVY_change(GTextField source, GEvent event) { //_CODE_:textVY:875249:
+public void textVY_change(GTextField source, GEvent event) { //_CODE_:textVY:431031:
   int y = strToInt(source.getText());
   if(whirl != null) whirl.vel.y = y;
   else if(flow != null) flow.vel.y = y;
@@ -113,35 +105,31 @@ public void textVY_change(GTextField source, GEvent event) { //_CODE_:textVY:875
   else if(trunk != null) trunk.vel.y = y;
   else if(star != null) star.vel.y = y;
   else if(killer != null) killer.vel.y = y;
-} //_CODE_:textVY:875249:
+} //_CODE_:textVY:431031:
 
-public void textDiam_change(GTextField source, GEvent event) { //_CODE_:textDiam:203248:
+public void textDiam_change(GTextField source, GEvent event) { //_CODE_:textDiam:654766:
   if(rock != null) rock.diam = strToInt(source.getText());
   else if(star != null) star.diam = strToInt(source.getText());
   else if(killer != null) killer.diam = strToInt(source.getText());
-} //_CODE_:textDiam:203248:
+} //_CODE_:textDiam:654766:
 
-public void textWid_change(GTextField source, GEvent event) { //_CODE_:textWid:933035:
+public void textWid_change(GTextField source, GEvent event) { //_CODE_:textWid:882318:
   if(trunk != null) trunk.w = strToInt(source.getText());
-} //_CODE_:textWid:933035:
+} //_CODE_:textWid:882318:
 
-public void textHei_change(GTextField source, GEvent event) { //_CODE_:textHei:393295:
+public void textHei_change(GTextField source, GEvent event) { //_CODE_:textHei:347397:
   if(trunk != null) trunk.h = strToInt(source.getText());
-} //_CODE_:textHei:393295:
+} //_CODE_:textHei:347397:
 
-public void textAngle_change(GTextField source, GEvent event) { //_CODE_:textAngle:512168:
+public void textAngle_change(GTextField source, GEvent event) { //_CODE_:textAngle:232844:
   if(trunk != null) trunk.angle = strToFloat(source.getText());
-} //_CODE_:textAngle:512168:
+} //_CODE_:textAngle:232844:
 
-public void textARot_change(GTextField source, GEvent event) { //_CODE_:textARot:857494:
+public void textARot_change(GTextField source, GEvent event) { //_CODE_:textARot:574210:
   if(trunk != null) trunk.aRot = strToFloat(source.getText());
-} //_CODE_:textARot:857494:
+} //_CODE_:textARot:574210:
 
-public void textRot_change(GTextField source, GEvent event) { //_CODE_:textRot:756135:
-  if(whirl != null) whirl.rotation = strToInt(source.getText());
-} //_CODE_:textRot:756135:
-
-public void buttonDel_click(GButton source, GEvent event) { //_CODE_:buttonDel:535657:
+public void buttonDel_click(GButton source, GEvent event) { //_CODE_:Del:405440:
   if(flow != null) flows.remove(flow);
   else if(whirl != null) whirls.remove(whirl);
   else if(rock != null) rocks.remove(rock);
@@ -151,9 +139,9 @@ public void buttonDel_click(GButton source, GEvent event) { //_CODE_:buttonDel:5
   else if(star != null) stars.remove(star);
   else if(killer != null) killers.remove(killer);
   panelProperties.setVisible(false);
-} //_CODE_:buttonDel:535657:
+} //_CODE_:Del:405440:
 
-public void cbFollowX_clicked(GCheckbox source, GEvent event) { //_CODE_:cbFollowX:388200:
+public void cbFollowX_clicked(GCheckbox source, GEvent event) { //_CODE_:cbFollowX:783922:
   boolean s = source.isSelected();
   if(flow != null) flow.followX = s;
   else if(whirl != null) whirl.followX = s;
@@ -161,9 +149,9 @@ public void cbFollowX_clicked(GCheckbox source, GEvent event) { //_CODE_:cbFollo
   else if(trunk != null) trunk.followX = s;
   else if(star != null) star.followX = s;
   else if(killer != null) killer.followX = s;
-} //_CODE_:cbFollowX:388200:
+} //_CODE_:cbFollowX:783922:
 
-public void cbFollowY_clicked(GCheckbox source, GEvent event) { //_CODE_:cbFollowY:658502:
+public void cbFollowY_clicked(GCheckbox source, GEvent event) { //_CODE_:cbFollowY:242827:
   boolean s = source.isSelected();
   if(flow != null) flow.followY = s;
   else if(whirl != null) whirl.followY = s;
@@ -171,9 +159,9 @@ public void cbFollowY_clicked(GCheckbox source, GEvent event) { //_CODE_:cbFollo
   else if(trunk != null) trunk.followY = s;
   else if(star != null) star.followY = s;
   else if(killer != null) killer.followY = s;
-} //_CODE_:cbFollowY:658502:
+} //_CODE_:cbFollowY:242827:
 
-public void buttonColor_click(GButton source, GEvent event) { //_CODE_:buttonColor:546816:
+public void buttonColor_click(GButton source, GEvent event) { //_CODE_:buttonColor:517347:
   color c = color(255);
   if(whirl != null) c = whirl.c;
   else if(rock != null) c = rock.c;
@@ -190,96 +178,108 @@ public void buttonColor_click(GButton source, GEvent event) { //_CODE_:buttonCol
   else if(exit != null) exit.c = c;
   else if(star != null) star.c = c;
   else if(killer != null) killer.c = c;
-} //_CODE_:buttonColor:546816:
+} //_CODE_:buttonColor:517347:
 
-public void cbBounceX_clicked(GCheckbox source, GEvent event) { //_CODE_:cbBounceX:249225:
+public void cbBounceX_clicked(GCheckbox source, GEvent event) { //_CODE_:cbBounceX:264789:
   boolean s = source.isSelected();
   if(whirl != null) whirl.bounceX = s;
   else if(rock != null) rock.bounceX = s;
   else if(trunk != null) trunk.bounceX = s;
   else if(star != null) star.bounceX = s;
   else if(killer != null) killer.bounceX = s;
-} //_CODE_:cbBounceX:249225:
+} //_CODE_:cbBounceX:264789:
 
-public void cbBounceY_clicked(GCheckbox source, GEvent event) { //_CODE_:cbBounceY:518802:
+public void cbBounceY_clicked(GCheckbox source, GEvent event) { //_CODE_:cbBounceY:219860:
   boolean s = source.isSelected();
   if(whirl != null) whirl.bounceY = s;
   else if(rock != null) rock.bounceY = s;
   else if(trunk != null) trunk.bounceY = s;
   else if(star != null) star.bounceY = s;
   else if(killer != null) killer.bounceY = s;
-} //_CODE_:cbBounceY:518802:
+} //_CODE_:cbBounceY:219860:
 
-public void buttonMove_click(GButton source, GEvent event) { //_CODE_:buttonMove:390924:
+public void buttonMove_click(GButton source, GEvent event) { //_CODE_:buttonMove:210926:
   move = true;
   clone = false;
-} //_CODE_:buttonMove:390924:
+} //_CODE_:buttonMove:210926:
 
-public void buttonClone_click(GButton source, GEvent event) { //_CODE_:buttonClone:745837:
+public void buttonClone_click(GButton source, GEvent event) { //_CODE_:buttonClone:203882:
   clone = !clone;
   move = false;
-} //_CODE_:buttonClone:745837:
+} //_CODE_:buttonClone:203882:
 
-public void buttonNew_click(GButton source, GEvent event) { //_CODE_:buttonNew:526174:
+public void textRot_change(GTextField source, GEvent event) { //_CODE_:textRot:879048:
+  if(whirl != null) whirl.rotation = strToInt(source.getText());
+} //_CODE_:textRot:879048:
+
+public void panelNew_click(GPanel source, GEvent event) { //_CODE_:panelNew:509105:
+  panelLevel.setCollapsed(true);
+} //_CODE_:panelNew:509105:
+
+public void buttonRockColor1_click(GButton source, GEvent event) { //_CODE_:buttonRockColor1:572893:
+  rc1 = colorChooser(rc1);
+} //_CODE_:buttonRockColor1:572893:
+
+public void buttonRockColor2_click(GButton source, GEvent event) { //_CODE_:buttonRockColor2:525147:
+  rc2 = colorChooser(rc2);
+} //_CODE_:buttonRockColor2:525147:
+
+public void buttonWhirlColor1_click(GButton source, GEvent event) { //_CODE_:buttonWhirlColor1:914060:
+  wc1 = colorChooser(wc1);
+} //_CODE_:buttonWhirlColor1:914060:
+
+public void buttonWhirlColor2_click(GButton source, GEvent event) { //_CODE_:buttonWhirlColor2:863383:
+  wc2 = colorChooser(wc2);
+} //_CODE_:buttonWhirlColor2:863383:
+
+public void buttonTrunkColor1_click(GButton source, GEvent event) { //_CODE_:buttonTrunkColor1:445136:
+  tc1 = colorChooser(tc1);
+} //_CODE_:buttonTrunkColor1:445136:
+
+public void buttonTrunkColor2_click(GButton source, GEvent event) { //_CODE_:buttonTrunkColor2:356496:
+  tc2 = colorChooser(tc2);
+} //_CODE_:buttonTrunkColor2:356496:
+
+public void panelLevel_click(GPanel source, GEvent event) { //_CODE_:panelLevel:246707:
+  panelNew.setCollapsed(true);
+} //_CODE_:panelLevel:246707:
+
+public void buttonBg_click(GButton source, GEvent event) { //_CODE_:buttonBg:408473:
+  bg = colorChooser(bg);
+} //_CODE_:buttonBg:408473:
+
+public void buttonColor1_click(GButton source, GEvent event) { //_CODE_:buttonColor1:720159:
+  c1 = colorChooser(c1);
+} //_CODE_:buttonColor1:720159:
+
+public void buttonColor2_click(GButton source, GEvent event) { //_CODE_:buttonColor2:848864:
+  c2 = colorChooser(c2);
+} //_CODE_:buttonColor2:848864:
+
+public void buttonControlsColor_click(GButton source, GEvent event) { //_CODE_:buttonControlsColor:504595:
+  cc = colorChooser(cc);
+} //_CODE_:buttonControlsColor:504595:
+
+public void buttonLoad_click(GButton source, GEvent event) { //_CODE_:buttonLoad:928435:
+  loadLevel(openDialog("Load Level"));
+} //_CODE_:buttonLoad:928435:
+
+public void buttonSaveAs_click(GButton source, GEvent event) { //_CODE_:buttonSaveAs:278614:
+  saveLevel(saveDialog("Save Level"));
+} //_CODE_:buttonSaveAs:278614:
+
+public void buttonNew_click(GButton source, GEvent event) { //_CODE_:buttonNew:671950:
   level = null;
   clearNodes();
   center.set(450, -height / 2);
   textW.setText("900");
   textH.setText("1600");
-} //_CODE_:buttonNew:526174:
+} //_CODE_:buttonNew:671950:
 
-public void buttonSave_click(GButton source, GEvent event) { //_CODE_:buttonSave:857076:
+public void buttonSave_click(GButton source, GEvent event) { //_CODE_:buttonSave:217893:
   if(level != null) saveLevel(level);
   else saveLevel(saveDialog("Save Level"));
-} //_CODE_:buttonSave:857076:
-
-public void panelNew_click(GPanel source, GEvent event) { //_CODE_:panelNew:314057:
-  panelLevel.setCollapsed(true);
-} //_CODE_:panelNew:314057:
-
-public void buttonRockColor1_click(GButton source, GEvent event) { //_CODE_:buttonRockColor1:226640:
-  rc1 = colorChooser(rc1);
-} //_CODE_:buttonRockColor1:226640:
-
-public void buttonRockColor2_click(GButton source, GEvent event) { //_CODE_:buttonRockColor2:931783:
-  rc2 = colorChooser(rc2);
-} //_CODE_:buttonRockColor2:931783:
-
-public void buttonWhirlColor2_click(GButton source, GEvent event) { //_CODE_:buttonWhirlColor2:518262:
-  wc2 = colorChooser(wc2);
-} //_CODE_:buttonWhirlColor2:518262:
-
-public void buttonWhirlColor1_click(GButton source, GEvent event) { //_CODE_:buttonWhirlColor1:367962:
-  wc1 = colorChooser(wc1);
-} //_CODE_:buttonWhirlColor1:367962:
-
-public void buttonTrunkColor2_click(GButton source, GEvent event) { //_CODE_:buttonTrunkColor2:661836:
-  tc2 = colorChooser(tc2);
-} //_CODE_:buttonTrunkColor2:661836:
-
-public void buttonTrunkColor1_click(GButton source, GEvent event) { //_CODE_:buttonTrunkColor1:387308:
-  tc1 = colorChooser(tc1);
-} //_CODE_:buttonTrunkColor1:387308:
-
-public void panelLevel_click(GPanel source, GEvent event) { //_CODE_:panelLevel:872215:
-  panelNew.setCollapsed(true);
-} //_CODE_:panelLevel:872215:
-
-public void buttonBg_click(GButton source, GEvent event) { //_CODE_:buttonBg:581974:
-  bg = colorChooser(bg);
-} //_CODE_:buttonBg:581974:
-
-public void buttonColor1_click(GButton source, GEvent event) { //_CODE_:buttonColor1:961914:
-  c1 = colorChooser(c1);
-} //_CODE_:buttonColor1:961914:
-
-public void buttonColor2_click(GButton source, GEvent event) { //_CODE_:buttonColor2:502158:
-  c2 = colorChooser(c2);
-} //_CODE_:buttonColor2:502158:
-
-public void buttonControlsColor_click(GButton source, GEvent event) { //_CODE_:buttonControlsColor:995310:
-  cc = colorChooser(cc);
-} //_CODE_:buttonControlsColor:995310:
+} //_CODE_:buttonSave:217893:
 
 
 
@@ -288,14 +288,14 @@ public void buttonControlsColor_click(GButton source, GEvent event) { //_CODE_:b
 public void createGUI(){
   G4P.messagesEnabled(false);
   G4P.setGlobalColorScheme(GCScheme.RED_SCHEME);
-  G4P.setCursor(ARROW);
+  G4P.setMouseOverEnabled(false);
   GButton.useRoundCorners(false);
+  G4P.setDisplayFont("Arial", G4P.PLAIN, 12);
   surface.setTitle("Lost Leaf Editor");
-  panelCreate = new GPanel(this, 472, 64, 64, 144, "Create");
+  panelCreate = new GPanel(this, 472, 64, 64, 176, "Create");
   panelCreate.setCollapsible(false);
   panelCreate.setDraggable(false);
   panelCreate.setText("Create");
-  panelCreate.setTextBold();
   panelCreate.setOpaque(true);
   buttonRock = new GButton(this, 0, 16, 64, 16);
   buttonRock.setText("Rock");
@@ -329,21 +329,7 @@ public void createGUI(){
   panelCreate.addControl(buttonExit);
   panelCreate.addControl(buttonStar);
   panelCreate.addControl(buttonKiller);
-  buttonLoad = new GButton(this, 64, 0, 56, 18);
-  buttonLoad.setText("Load");
-  buttonLoad.addEventHandler(this, "buttonLoad_click");
-  buttonSaveAs = new GButton(this, 192, 0, 56, 18);
-  buttonSaveAs.setText("Save As");
-  buttonSaveAs.addEventHandler(this, "buttonSaveAs_click");
-  cbSnap = new GCheckbox(this, 480, 0, 56, 16);
-  cbSnap.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
-  cbSnap.setText("Snap");
-  cbSnap.setOpaque(true);
-  cbSnap.setSelected(true);
-  textS = new GTextField(this, 536, 0, 32, 16, G4P.SCROLLBARS_NONE);
-  textS.setText("50");
-  textS.setOpaque(true);
-  panelProperties = new GPanel(this, 0, 24, 136, 288, "Properties");
+  panelProperties = new GPanel(this, 3, 24, 136, 288, "Properties");
   panelProperties.setCollapsible(false);
   panelProperties.setDraggable(false);
   panelProperties.setText("Properties");
@@ -420,12 +406,9 @@ public void createGUI(){
   textARot = new GTextField(this, 48, 120, 40, 16, G4P.SCROLLBARS_NONE);
   textARot.setOpaque(true);
   textARot.addEventHandler(this, "textARot_change");
-  textRot = new GTextField(this, 48, 136, 40, 16, G4P.SCROLLBARS_NONE);
-  textRot.setOpaque(true);
-  textRot.addEventHandler(this, "textRot_change");
-  buttonDel = new GButton(this, 72, 240, 56, 16);
-  buttonDel.setText("Delete");
-  buttonDel.addEventHandler(this, "buttonDel_click");
+  Del = new GButton(this, 72, 240, 56, 16);
+  Del.setText("Delete");
+  Del.addEventHandler(this, "buttonDel_click");
   cbFollowX = new GCheckbox(this, 0, 168, 80, 16);
   cbFollowX.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
   cbFollowX.setText("Follow X");
@@ -455,6 +438,9 @@ public void createGUI(){
   buttonClone = new GButton(this, 72, 264, 56, 16);
   buttonClone.setText("Clone");
   buttonClone.addEventHandler(this, "buttonClone_click");
+  textRot = new GTextField(this, 48, 136, 40, 16, G4P.SCROLLBARS_NONE);
+  textRot.setOpaque(true);
+  textRot.addEventHandler(this, "textRot_change");
   panelProperties.addControl(labelPos);
   panelProperties.addControl(labelFlow);
   panelProperties.addControl(labelRange);
@@ -476,8 +462,7 @@ public void createGUI(){
   panelProperties.addControl(textHei);
   panelProperties.addControl(textAngle);
   panelProperties.addControl(textARot);
-  panelProperties.addControl(textRot);
-  panelProperties.addControl(buttonDel);
+  panelProperties.addControl(Del);
   panelProperties.addControl(cbFollowX);
   panelProperties.addControl(cbFollowY);
   panelProperties.addControl(buttonColor);
@@ -485,41 +470,32 @@ public void createGUI(){
   panelProperties.addControl(cbBounceY);
   panelProperties.addControl(buttonMove);
   panelProperties.addControl(buttonClone);
-  buttonNew = new GButton(this, 0, 0, 56, 18);
-  buttonNew.setText("New");
-  buttonNew.addEventHandler(this, "buttonNew_click");
-  sliderScale = new GSlider(this, 576, 0, 168, 16, 10.0);
-  sliderScale.setLimits(1.0, 1.0, 10.0);
-  sliderScale.setNumberFormat(G4P.DECIMAL, 2);
-  sliderScale.setOpaque(false);
-  buttonSave = new GButton(this, 128, 0, 56, 18);
-  buttonSave.setText("Save");
-  buttonSave.addEventHandler(this, "buttonSave_click");
+  panelProperties.addControl(textRot);
   panelNew = new GPanel(this, 152, 296, 352, 160, "New Objects");
   panelNew.setDraggable(false);
   panelNew.setText("New Objects");
   panelNew.setOpaque(true);
   panelNew.addEventHandler(this, "panelNew_click");
-  label5 = new GLabel(this, 0, 40, 48, 16);
-  label5.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label5.setText("Rocks");
-  label5.setOpaque(false);
-  label6 = new GLabel(this, 0, 64, 48, 16);
-  label6.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label6.setText("Trunks");
-  label6.setOpaque(false);
-  label7 = new GLabel(this, 0, 104, 48, 16);
-  label7.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label7.setText("Whirls");
-  label7.setOpaque(false);
-  label8 = new GLabel(this, 48, 24, 40, 16);
-  label8.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label8.setText("Num");
-  label8.setOpaque(false);
-  label9 = new GLabel(this, 88, 24, 64, 16);
-  label9.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label9.setText("Max Width");
-  label9.setOpaque(false);
+  labelNewRocks = new GLabel(this, 0, 40, 48, 16);
+  labelNewRocks.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelNewRocks.setText("Rocks");
+  labelNewRocks.setOpaque(false);
+  labelNewTrunks = new GLabel(this, 0, 64, 48, 16);
+  labelNewTrunks.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelNewTrunks.setText("Trunks");
+  labelNewTrunks.setOpaque(false);
+  labelNewWhirls = new GLabel(this, 0, 104, 48, 16);
+  labelNewWhirls.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelNewWhirls.setText("Whirls");
+  labelNewWhirls.setOpaque(false);
+  labelNewNum = new GLabel(this, 48, 24, 40, 16);
+  labelNewNum.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelNewNum.setText("Num");
+  labelNewNum.setOpaque(false);
+  labelNewMaxWidth = new GLabel(this, 88, 24, 64, 16);
+  labelNewMaxWidth.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelNewMaxWidth.setText("Max Width");
+  labelNewMaxWidth.setOpaque(false);
   textRockNum = new GTextField(this, 48, 40, 40, 16, G4P.SCROLLBARS_NONE);
   textRockNum.setText("0");
   textRockNum.setOpaque(true);
@@ -541,37 +517,37 @@ public void createGUI(){
   textWhirlMaxRot = new GTextField(this, 152, 104, 64, 16, G4P.SCROLLBARS_NONE);
   textWhirlMaxRot.setText("400");
   textWhirlMaxRot.setOpaque(true);
-  label10 = new GLabel(this, 88, 88, 64, 16);
-  label10.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label10.setText("Max Flow");
-  label10.setOpaque(false);
-  label11 = new GLabel(this, 152, 88, 64, 16);
-  label11.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label11.setText("Max Rot");
-  label11.setOpaque(false);
+  labelNewMaxFlow = new GLabel(this, 88, 88, 64, 16);
+  labelNewMaxFlow.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelNewMaxFlow.setText("Max Flow");
+  labelNewMaxFlow.setOpaque(false);
+  labelNewMaxRot = new GLabel(this, 152, 88, 64, 16);
+  labelNewMaxRot.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelNewMaxRot.setText("Max Rot");
+  labelNewMaxRot.setOpaque(false);
   buttonRockColor1 = new GButton(this, 224, 40, 56, 16);
   buttonRockColor1.setText("Color 1");
   buttonRockColor1.addEventHandler(this, "buttonRockColor1_click");
   buttonRockColor2 = new GButton(this, 288, 40, 56, 16);
   buttonRockColor2.setText("Color 2");
   buttonRockColor2.addEventHandler(this, "buttonRockColor2_click");
-  buttonWhirlColor2 = new GButton(this, 288, 104, 56, 16);
-  buttonWhirlColor2.setText("Color 2");
-  buttonWhirlColor2.addEventHandler(this, "buttonWhirlColor2_click");
   buttonWhirlColor1 = new GButton(this, 224, 104, 56, 16);
   buttonWhirlColor1.setText("Color 1");
   buttonWhirlColor1.addEventHandler(this, "buttonWhirlColor1_click");
-  buttonTrunkColor2 = new GButton(this, 288, 64, 56, 16);
-  buttonTrunkColor2.setText("Color 2");
-  buttonTrunkColor2.addEventHandler(this, "buttonTrunkColor2_click");
+  buttonWhirlColor2 = new GButton(this, 288, 104, 56, 16);
+  buttonWhirlColor2.setText("Color 2");
+  buttonWhirlColor2.addEventHandler(this, "buttonWhirlColor2_click");
   buttonTrunkColor1 = new GButton(this, 224, 64, 56, 16);
   buttonTrunkColor1.setText("Color 1");
   buttonTrunkColor1.addEventHandler(this, "buttonTrunkColor1_click");
-  panelNew.addControl(label5);
-  panelNew.addControl(label6);
-  panelNew.addControl(label7);
-  panelNew.addControl(label8);
-  panelNew.addControl(label9);
+  buttonTrunkColor2 = new GButton(this, 288, 64, 56, 16);
+  buttonTrunkColor2.setText("Color 2");
+  buttonTrunkColor2.addEventHandler(this, "buttonTrunkColor2_click");
+  panelNew.addControl(labelNewRocks);
+  panelNew.addControl(labelNewTrunks);
+  panelNew.addControl(labelNewWhirls);
+  panelNew.addControl(labelNewNum);
+  panelNew.addControl(labelNewMaxWidth);
   panelNew.addControl(textRockNum);
   panelNew.addControl(textTrunkNum);
   panelNew.addControl(textWhirlNum);
@@ -579,23 +555,23 @@ public void createGUI(){
   panelNew.addControl(textTrunkMax);
   panelNew.addControl(textWhirlMaxFlow);
   panelNew.addControl(textWhirlMaxRot);
-  panelNew.addControl(label10);
-  panelNew.addControl(label11);
+  panelNew.addControl(labelNewMaxFlow);
+  panelNew.addControl(labelNewMaxRot);
   panelNew.addControl(buttonRockColor1);
   panelNew.addControl(buttonRockColor2);
-  panelNew.addControl(buttonWhirlColor2);
   panelNew.addControl(buttonWhirlColor1);
-  panelNew.addControl(buttonTrunkColor2);
+  panelNew.addControl(buttonWhirlColor2);
   panelNew.addControl(buttonTrunkColor1);
+  panelNew.addControl(buttonTrunkColor2);
   panelLevel = new GPanel(this, 152, 24, 288, 216, "Level Properties");
   panelLevel.setDraggable(false);
   panelLevel.setText("Level Properties");
   panelLevel.setOpaque(true);
   panelLevel.addEventHandler(this, "panelLevel_click");
-  label12 = new GLabel(this, 0, 24, 80, 16);
-  label12.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label12.setText("Dim");
-  label12.setOpaque(false);
+  labelLevelDim = new GLabel(this, 0, 24, 80, 16);
+  labelLevelDim.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelLevelDim.setText("Dim");
+  labelLevelDim.setOpaque(false);
   textW = new GTextField(this, 80, 24, 40, 16, G4P.SCROLLBARS_NONE);
   textW.setText("900");
   textW.setOpaque(true);
@@ -614,10 +590,10 @@ public void createGUI(){
   cbRotate.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
   cbRotate.setText("Rotate");
   cbRotate.setOpaque(false);
-  label13 = new GLabel(this, 160, 24, 80, 16);
-  label13.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label13.setText("Scale");
-  label13.setOpaque(false);
+  labelLevelScale = new GLabel(this, 160, 24, 80, 16);
+  labelLevelScale.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelLevelScale.setText("Scale");
+  labelLevelScale.setOpaque(false);
   textScale = new GTextField(this, 240, 24, 40, 16, G4P.SCROLLBARS_NONE);
   textScale.setText("1");
   textScale.setOpaque(true);
@@ -629,17 +605,17 @@ public void createGUI(){
   cbTiltY.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
   cbTiltY.setText("Tilt Y");
   cbTiltY.setOpaque(false);
-  label14 = new GLabel(this, 160, 72, 80, 16);
-  label14.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label14.setText("Max Tilt");
-  label14.setOpaque(false);
+  labelLevelMaxTilt = new GLabel(this, 160, 72, 80, 16);
+  labelLevelMaxTilt.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelLevelMaxTilt.setText("Max Tilt");
+  labelLevelMaxTilt.setOpaque(false);
   textMaxTilt = new GTextField(this, 240, 72, 40, 16, G4P.SCROLLBARS_NONE);
   textMaxTilt.setText("100");
   textMaxTilt.setOpaque(true);
-  label15 = new GLabel(this, 0, 96, 80, 16);
-  label15.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label15.setText("Saved Leafs");
-  label15.setOpaque(false);
+  labelLevelSavedLeafs = new GLabel(this, 0, 96, 80, 16);
+  labelLevelSavedLeafs.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelLevelSavedLeafs.setText("Saved Leafs");
+  labelLevelSavedLeafs.setOpaque(false);
   textVictory = new GTextField(this, 80, 96, 40, 16, G4P.SCROLLBARS_NONE);
   textVictory.setText("1");
   textVictory.setOpaque(true);
@@ -647,49 +623,74 @@ public void createGUI(){
   buttonBg.setText("Background");
   buttonBg.addEventHandler(this, "buttonBg_click");
   buttonColor1 = new GButton(this, 8, 144, 96, 16);
-  buttonColor1.setText("Water Color 1");
+  buttonColor1.setText("Color 1");
   buttonColor1.addEventHandler(this, "buttonColor1_click");
   buttonColor2 = new GButton(this, 8, 168, 96, 16);
-  buttonColor2.setText("Water Color 2");
+  buttonColor2.setText("Color 2");
   buttonColor2.addEventHandler(this, "buttonColor2_click");
   buttonControlsColor = new GButton(this, 8, 192, 96, 16);
   buttonControlsColor.setText("Controls Color");
   buttonControlsColor.addEventHandler(this, "buttonControlsColor_click");
-  label16 = new GLabel(this, 160, 120, 80, 16);
-  label16.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label16.setText("Intro Text");
-  label16.setOpaque(false);
+  labelIntroText = new GLabel(this, 160, 120, 80, 16);
+  labelIntroText.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelIntroText.setText("Intro Text");
+  labelIntroText.setOpaque(false);
   textIntro = new GTextArea(this, 112, 136, 168, 72, G4P.SCROLLBARS_NONE);
   textIntro.setOpaque(true);
-  label1 = new GLabel(this, 160, 96, 80, 16);
-  label1.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
-  label1.setText("Stars");
-  label1.setOpaque(false);
+  labelLevelStars = new GLabel(this, 160, 96, 80, 16);
+  labelLevelStars.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelLevelStars.setText("Stars");
+  labelLevelStars.setOpaque(false);
   textPoints = new GTextField(this, 240, 96, 40, 16, G4P.SCROLLBARS_NONE);
   textPoints.setText("0");
   textPoints.setOpaque(true);
-  panelLevel.addControl(label12);
+  panelLevel.addControl(labelLevelDim);
   panelLevel.addControl(textW);
   panelLevel.addControl(textH);
   panelLevel.addControl(cbGFollowX);
   panelLevel.addControl(cbGFollowY);
   panelLevel.addControl(cbRotate);
-  panelLevel.addControl(label13);
+  panelLevel.addControl(labelLevelScale);
   panelLevel.addControl(textScale);
   panelLevel.addControl(cbTiltX);
   panelLevel.addControl(cbTiltY);
-  panelLevel.addControl(label14);
+  panelLevel.addControl(labelLevelMaxTilt);
   panelLevel.addControl(textMaxTilt);
-  panelLevel.addControl(label15);
+  panelLevel.addControl(labelLevelSavedLeafs);
   panelLevel.addControl(textVictory);
   panelLevel.addControl(buttonBg);
   panelLevel.addControl(buttonColor1);
   panelLevel.addControl(buttonColor2);
   panelLevel.addControl(buttonControlsColor);
-  panelLevel.addControl(label16);
+  panelLevel.addControl(labelIntroText);
   panelLevel.addControl(textIntro);
-  panelLevel.addControl(label1);
+  panelLevel.addControl(labelLevelStars);
   panelLevel.addControl(textPoints);
+  buttonLoad = new GButton(this, 64, 0, 56, 18);
+  buttonLoad.setText("Load");
+  buttonLoad.addEventHandler(this, "buttonLoad_click");
+  buttonSaveAs = new GButton(this, 192, 0, 56, 18);
+  buttonSaveAs.setText("Save As");
+  buttonSaveAs.addEventHandler(this, "buttonSaveAs_click");
+  cbSnap = new GCheckbox(this, 480, 0, 56, 16);
+  cbSnap.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
+  cbSnap.setText("Snap");
+  cbSnap.setOpaque(true);
+  cbSnap.setSelected(true);
+  textS = new GTextField(this, 536, 0, 32, 16, G4P.SCROLLBARS_NONE);
+  textS.setText("50");
+  textS.setOpaque(true);
+  buttonNew = new GButton(this, 0, 0, 56, 18);
+  buttonNew.setText("New");
+  buttonNew.addEventHandler(this, "buttonNew_click");
+  sliderScale = new GSlider(this, 576, 0, 168, 16, 10.0);
+  sliderScale.setLimits(1.0, 1.0, 10.0);
+  sliderScale.setNbrTicks(10);
+  sliderScale.setNumberFormat(G4P.DECIMAL, 2);
+  sliderScale.setOpaque(false);
+  buttonSave = new GButton(this, 128, 0, 56, 18);
+  buttonSave.setText("Save");
+  buttonSave.addEventHandler(this, "buttonSave_click");
 }
 
 // Variable declarations 
@@ -703,10 +704,6 @@ GButton buttonLeaf;
 GButton buttonExit; 
 GButton buttonStar; 
 GButton buttonKiller; 
-GButton buttonLoad; 
-GButton buttonSaveAs; 
-GCheckbox cbSnap; 
-GTextField textS; 
 GPanel panelProperties; 
 GLabel labelPos; 
 GLabel labelFlow; 
@@ -729,8 +726,7 @@ GTextField textWid;
 GTextField textHei; 
 GTextField textAngle; 
 GTextField textARot; 
-GTextField textRot; 
-GButton buttonDel; 
+GButton Del; 
 GCheckbox cbFollowX; 
 GCheckbox cbFollowY; 
 GButton buttonColor; 
@@ -738,15 +734,13 @@ GCheckbox cbBounceX;
 GCheckbox cbBounceY; 
 GButton buttonMove; 
 GButton buttonClone; 
-GButton buttonNew; 
-GSlider sliderScale; 
-GButton buttonSave; 
+GTextField textRot; 
 GPanel panelNew; 
-GLabel label5; 
-GLabel label6; 
-GLabel label7; 
-GLabel label8; 
-GLabel label9; 
+GLabel labelNewRocks; 
+GLabel labelNewTrunks; 
+GLabel labelNewWhirls; 
+GLabel labelNewNum; 
+GLabel labelNewMaxWidth; 
 GTextField textRockNum; 
 GTextField textTrunkNum; 
 GTextField textWhirlNum; 
@@ -754,34 +748,41 @@ GTextField textRockMax;
 GTextField textTrunkMax; 
 GTextField textWhirlMaxFlow; 
 GTextField textWhirlMaxRot; 
-GLabel label10; 
-GLabel label11; 
+GLabel labelNewMaxFlow; 
+GLabel labelNewMaxRot; 
 GButton buttonRockColor1; 
 GButton buttonRockColor2; 
-GButton buttonWhirlColor2; 
 GButton buttonWhirlColor1; 
-GButton buttonTrunkColor2; 
+GButton buttonWhirlColor2; 
 GButton buttonTrunkColor1; 
+GButton buttonTrunkColor2; 
 GPanel panelLevel; 
-GLabel label12; 
+GLabel labelLevelDim; 
 GTextField textW; 
 GTextField textH; 
 GCheckbox cbGFollowX; 
 GCheckbox cbGFollowY; 
 GCheckbox cbRotate; 
-GLabel label13; 
+GLabel labelLevelScale; 
 GTextField textScale; 
 GCheckbox cbTiltX; 
 GCheckbox cbTiltY; 
-GLabel label14; 
+GLabel labelLevelMaxTilt; 
 GTextField textMaxTilt; 
-GLabel label15; 
+GLabel labelLevelSavedLeafs; 
 GTextField textVictory; 
 GButton buttonBg; 
 GButton buttonColor1; 
 GButton buttonColor2; 
 GButton buttonControlsColor; 
-GLabel label16; 
+GLabel labelIntroText; 
 GTextArea textIntro; 
-GLabel label1; 
+GLabel labelLevelStars; 
 GTextField textPoints; 
+GButton buttonLoad; 
+GButton buttonSaveAs; 
+GCheckbox cbSnap; 
+GTextField textS; 
+GButton buttonNew; 
+GSlider sliderScale; 
+GButton buttonSave; 
