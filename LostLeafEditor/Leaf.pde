@@ -1,16 +1,16 @@
 class Leaf {
   PVector pos;
+  int diam;
   color c;
-  int radius;
 
   Leaf(PVector p) {
-    this(p, color(255));
+    this(p, 40, color(255));
   }
 
-  Leaf(PVector p, color co) {
+  Leaf(PVector p, int d, color co) {
     pos = p;
     c = co;
-    radius = 0;
+    diam = d;
   }
 
   void update() {
@@ -19,7 +19,10 @@ class Leaf {
     stroke(0);
     pushMatrix();
     translate(pos.x - center.x, pos.y - center.y);
+    pushMatrix();
+    scale(diam / 40.0);
     triangle(20, 0, -20, -15, -20, 15);
+    popMatrix();
     fill(255);
     ellipse(0, 0, 10, 10);
     popMatrix();

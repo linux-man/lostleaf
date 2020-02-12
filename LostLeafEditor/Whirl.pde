@@ -4,7 +4,7 @@ class Whirl {
   boolean followX, followY, bounceX, bounceY;
   color c;
   
-  int sign, addPi, r, f;
+  int m, sign, addPi, r, f;
 
   Whirl(PVector p) {
     this(p, 100, 100, defaultRange, new PVector(0, 0), false, false, false, false, color(255));
@@ -24,6 +24,7 @@ class Whirl {
   }
 
   void update() {
+    m = millis();
     sign = sign(rotation);
     r = max(abs(flow), 40);
     f = (flow == 0) ? 0 : 20;
@@ -31,7 +32,6 @@ class Whirl {
     strokeWeight(6);
     stroke(c);
     noFill();
-    int m = millis();
     pushMatrix();
     translate(pos.x - center.x, pos.y - center.y);
     rotate(m / 120000.0 * rotation);

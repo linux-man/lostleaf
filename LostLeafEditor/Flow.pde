@@ -29,6 +29,7 @@ class Flow {
     line(0, 0, flow.x, flow.y);
     noFill();
     strokeWeight(1);
+    stroke(0, 255, 0);
     ellipse(0, 0, range * 2, range * 2);
     popMatrix();
   }

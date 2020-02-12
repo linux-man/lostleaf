@@ -1,6 +1,8 @@
 class Killer extends Obstacle {
   color c;
 
+  int m;
+
   Killer(PVector p) {
     this(p, 50);
   }
@@ -17,12 +19,13 @@ class Killer extends Obstacle {
 
   void update() {
     super.update();
-    int m = millis();
+    m = millis();
     fill(c);
     translate((int)(pos.x - center.x), (int)(pos.y - center.y));
     rotate(m / 600.0);
-    for(float n = 0; n < TWO_PI; n += HALF_PI / 2) arc(0, 0, diam * 4/5, diam * 4/5, n, n + QUARTER_PI / 2);      
-    for(float n = QUARTER_PI / 2; n < TWO_PI; n += HALF_PI / 2) arc(0, 0, diam, diam, n, n + QUARTER_PI / 2);         
+    //for(float n = 0; n < TWO_PI; n += HALF_PI / 2) arc(0, 0, diam * 4/5, diam * 4/5, n, n + QUARTER_PI / 2);      
+    for(float n = QUARTER_PI / 2; n < TWO_PI; n += HALF_PI / 2) arc(0, 0, diam, diam, n, n + QUARTER_PI / 2);   
+    ellipse(0, 0, diam * 4/5, diam * 4/5);
     rotate(-m / 600.0);
     translate(-(int)(pos.x - center.x), -(int)(pos.y - center.y));
   }

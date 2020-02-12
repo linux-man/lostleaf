@@ -4,6 +4,8 @@ class Killer {
   boolean followX, followY, bounceX, bounceY;
   color c;
 
+  int m;
+
   Killer(PVector p) {
     this(p, 50, new PVector(0, 0), false, false, false, false, color(255));
   }
@@ -20,15 +22,16 @@ class Killer {
   }
 
   void update() {
-    int m = millis();
+    m = millis();
     fill(c);
     strokeWeight(1);
     stroke(0);
     pushMatrix();
     translate(pos.x - center.x, pos.y - center.y);
     rotate(m / 600.0);
-    for(float n = 0; n < TWO_PI; n += HALF_PI / 2) arc(0, 0, diam * 4/5, diam * 4/5, n, n + QUARTER_PI / 2);      
+    //for(float n = 0; n < TWO_PI; n += HALF_PI / 2) arc(0, 0, diam * 4/5, diam * 4/5, n, n + QUARTER_PI / 2);      
     for(float n = QUARTER_PI / 2; n < TWO_PI; n += HALF_PI / 2) arc(0, 0, diam, diam, n, n + QUARTER_PI / 2);         
+    ellipse(0, 0, diam * 4/5, diam * 4/5);
     fill(255);
     ellipse(0, 0, 10, 10);
     popMatrix();

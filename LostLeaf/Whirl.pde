@@ -4,7 +4,7 @@ class Whirl {
   boolean followX, followY, bounceX, bounceY;
   color c;
 
-  int sign, addPi, r, f;
+  int m, sign, addPi, r, f;
   boolean moving;
 
   Whirl(PVector p) {
@@ -27,6 +27,7 @@ class Whirl {
   }
 
   void update() {
+    m = millis();
     if(moving) {
       move(PVector.mult(vel, dt));
       if(bounceX || bounceY) {
@@ -49,7 +50,6 @@ class Whirl {
     f = (flow == 0) ? 0 : 20;
     addPi = (sign > 0) ? 1 : 0;
     stroke(c);
-    int m = millis();
     translate((int)(pos.x - center.x), (int)(pos.y - center.y));
     rotate(m / 120000.0 * rotation);
     ellipse(0, 0, f * 2, f * 2);

@@ -1,20 +1,20 @@
 class Leaf {
   PVector pos, mov;
+  int diam;
   color c;
-  //int radius;
 
   float ds;
   int touched, crunched;
   boolean sucked, saved;
 
-  Leaf(PVector p, color co) {
+  Leaf(PVector p, int d, color co) {
     pos = p;
+    diam = d;
     c = co;
     mov = new PVector(0, 0);
     sucked = false;
     saved = false;
     ds = 1;
-    //radius = 0;
   }
 
   void update() {
@@ -67,7 +67,9 @@ class Leaf {
     if(sucked) ds += dt * 3;
     else if(saved) ds -= dt * 3 / 4;
     scale(1 / ds);
+    scale(diam / 40.0);
     triangle(20, 0, -20, -15, -20, 15);
+    scale(40.0 / diam);
     scale(ds);
     rotate(-mov.heading());
     translate(-(int)(pos.x - center.x), -(int)(pos.y - center.y));
@@ -77,7 +79,7 @@ class Leaf {
     if(pos.dist(o.pos) < o.diam * 2) {
       PVector d = PVector.sub(pos, o.pos);
       PVector m = mov.copy();
-      float len = d.mag();//float len = d.mag() - radius;
+      float len = d.mag() - (diam - 40) / 2;//float len = d.mag();
       float v = mov.mag();
       float dot = m.normalize().dot(d.normalize());
       float cross = m.cross(d).z;

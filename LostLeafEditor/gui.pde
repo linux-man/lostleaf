@@ -46,6 +46,10 @@ public void buttonKiller_click(GButton source, GEvent event) { //_CODE_:buttonKi
   killers.add(new Killer(pos.copy()));
 } //_CODE_:buttonKiller:716442:
 
+public void buttonArea_click(GButton source, GEvent event) { //_CODE_:buttonArea:259582:
+  areas.add(new Area(pos.copy()));
+} //_CODE_:buttonArea:259582:
+
 public void textX_change(GTextField source, GEvent event) { //_CODE_:textX:693334:
   int x = strToInt(source.getText());
   if(whirl != null) whirl.pos.x = x;
@@ -111,6 +115,7 @@ public void textDiam_change(GTextField source, GEvent event) { //_CODE_:textDiam
   if(rock != null) rock.diam = strToInt(source.getText());
   else if(star != null) star.diam = strToInt(source.getText());
   else if(killer != null) killer.diam = strToInt(source.getText());
+  else if(leaf != null) leaf.diam = strToInt(source.getText());
 } //_CODE_:textDiam:654766:
 
 public void textWid_change(GTextField source, GEvent event) { //_CODE_:textWid:882318:
@@ -122,14 +127,14 @@ public void textHei_change(GTextField source, GEvent event) { //_CODE_:textHei:3
 } //_CODE_:textHei:347397:
 
 public void textAngle_change(GTextField source, GEvent event) { //_CODE_:textAngle:232844:
-  if(trunk != null) trunk.angle = strToFloat(source.getText());
+  if(trunk != null) trunk.angle = strToInt(source.getText());
 } //_CODE_:textAngle:232844:
 
 public void textARot_change(GTextField source, GEvent event) { //_CODE_:textARot:574210:
-  if(trunk != null) trunk.aRot = strToFloat(source.getText());
+  if(trunk != null) trunk.aRot = strToInt(source.getText());
 } //_CODE_:textARot:574210:
 
-public void buttonDel_click(GButton source, GEvent event) { //_CODE_:Del:405440:
+public void buttonDel_click(GButton source, GEvent event) { //_CODE_:buttonDel:405440:
   if(flow != null) flows.remove(flow);
   else if(whirl != null) whirls.remove(whirl);
   else if(rock != null) rocks.remove(rock);
@@ -138,8 +143,9 @@ public void buttonDel_click(GButton source, GEvent event) { //_CODE_:Del:405440:
   else if(exit != null) exits.remove(exit);
   else if(star != null) stars.remove(star);
   else if(killer != null) killers.remove(killer);
+  else if(area != null) areas.remove(area);
   panelProperties.setVisible(false);
-} //_CODE_:Del:405440:
+} //_CODE_:buttonDel:405440:
 
 public void cbFollowX_clicked(GCheckbox source, GEvent event) { //_CODE_:cbFollowX:783922:
   boolean s = source.isSelected();
@@ -149,6 +155,8 @@ public void cbFollowX_clicked(GCheckbox source, GEvent event) { //_CODE_:cbFollo
   else if(trunk != null) trunk.followX = s;
   else if(star != null) star.followX = s;
   else if(killer != null) killer.followX = s;
+  else if(killer != null) killer.followX = s;
+  else if(area != null) area.followX = s;
 } //_CODE_:cbFollowX:783922:
 
 public void cbFollowY_clicked(GCheckbox source, GEvent event) { //_CODE_:cbFollowY:242827:
@@ -159,6 +167,7 @@ public void cbFollowY_clicked(GCheckbox source, GEvent event) { //_CODE_:cbFollo
   else if(trunk != null) trunk.followY = s;
   else if(star != null) star.followY = s;
   else if(killer != null) killer.followY = s;
+  else if(area != null) area.followY = s;
 } //_CODE_:cbFollowY:242827:
 
 public void buttonColor_click(GButton source, GEvent event) { //_CODE_:buttonColor:517347:
@@ -187,6 +196,7 @@ public void cbBounceX_clicked(GCheckbox source, GEvent event) { //_CODE_:cbBounc
   else if(trunk != null) trunk.bounceX = s;
   else if(star != null) star.bounceX = s;
   else if(killer != null) killer.bounceX = s;
+  else if(area != null) area.bounceX = s;
 } //_CODE_:cbBounceX:264789:
 
 public void cbBounceY_clicked(GCheckbox source, GEvent event) { //_CODE_:cbBounceY:219860:
@@ -196,6 +206,7 @@ public void cbBounceY_clicked(GCheckbox source, GEvent event) { //_CODE_:cbBounc
   else if(trunk != null) trunk.bounceY = s;
   else if(star != null) star.bounceY = s;
   else if(killer != null) killer.bounceY = s;
+  else if(area != null) area.bounceY = s;
 } //_CODE_:cbBounceY:219860:
 
 public void buttonMove_click(GButton source, GEvent event) { //_CODE_:buttonMove:210926:
@@ -274,12 +285,111 @@ public void buttonNew_click(GButton source, GEvent event) { //_CODE_:buttonNew:6
   center.set(450, -height / 2);
   textW.setText("900");
   textH.setText("1600");
+  panelCreate.setVisible(false);
+  panelProperties.setVisible(false);
+  panelAreaProperties.setVisible(false);
 } //_CODE_:buttonNew:671950:
 
 public void buttonSave_click(GButton source, GEvent event) { //_CODE_:buttonSave:217893:
   if(level != null) saveLevel(level);
   else saveLevel(saveDialog("Save Level"));
 } //_CODE_:buttonSave:217893:
+
+public void dropListObj_click(GDropList source, GEvent event) { //_CODE_:dropListObj:859383:
+  area.object = source.getSelectedIndex ();
+  switch(area.object) {
+    case 0: case 2: case 3://Rocks, Stars, Killers
+      showHideAreaNonWhirls();
+      break;
+    case 1: 
+      showHideAreaWhirls();
+      break;
+  }
+} //_CODE_:dropListObj:859383:
+
+public void textMinQuant_change(GTextField source, GEvent event) { //_CODE_:textMinQuant:500992:
+  area.quantMin = strToInt(source.getText());
+} //_CODE_:textMinQuant:500992:
+
+public void textMaxQuant_change(GTextField source, GEvent event) { //_CODE_:textMaxQuant:790984:
+  area.quantMax = strToInt(source.getText());
+} //_CODE_:textMaxQuant:790984:
+
+public void textMinVX_change(GTextField source, GEvent event) { //_CODE_:textMinVX:433550:
+  area.velMin.x = strToInt(source.getText());
+} //_CODE_:textMinVX:433550:
+
+public void textMaxVX_change(GTextField source, GEvent event) { //_CODE_:textMaxVX:819764:
+  area.velMax.x = strToInt(source.getText());
+} //_CODE_:textMaxVX:819764:
+
+public void textMinVY_change(GTextField source, GEvent event) { //_CODE_:textMinVY:822584:
+  area.velMin.y = strToInt(source.getText());
+} //_CODE_:textMinVY:822584:
+
+public void textMaxVY_change(GTextField source, GEvent event) { //_CODE_:textMaxVY:906842:
+  area.velMax.y = strToInt(source.getText());
+} //_CODE_:textMaxVY:906842:
+
+public void buttonAreaColor1_click(GButton source, GEvent event) { //_CODE_:buttonAreaColor1:968901:
+  area.c1 = colorChooser(area.c1);
+} //_CODE_:buttonAreaColor1:968901:
+
+public void buttonAreaColor2_click(GButton source, GEvent event) { //_CODE_:buttonAreaColor2:508744:
+  area.c2 = colorChooser(area.c2);
+} //_CODE_:buttonAreaColor2:508744:
+
+public void textAreaX_change(GTextField source, GEvent event) { //_CODE_:textAreaX:589381:
+  area.pos.x = strToInt(source.getText());
+} //_CODE_:textAreaX:589381:
+
+public void textAreaY_change(GTextField source, GEvent event) { //_CODE_:textAreaY:555219:
+  area.pos.y = strToInt(source.getText());
+} //_CODE_:textAreaY:555219:
+
+public void textAreaWid_change(GTextField source, GEvent event) { //_CODE_:textAreaWid:761327:
+  area.w = strToInt(source.getText());
+} //_CODE_:textAreaWid:761327:
+
+public void textAreaHei_change(GTextField source, GEvent event) { //_CODE_:textAreaHei:211712:
+  area.h = strToInt(source.getText());
+} //_CODE_:textAreaHei:211712:
+
+public void textAreaSeed_change(GTextField source, GEvent event) { //_CODE_:textAreaSeed:280220:
+  area.seed = strToInt(source.getText());
+} //_CODE_:textAreaSeed:280220:
+
+public void textMinRange_change(GTextField source, GEvent event) { //_CODE_:textMinRange:622195:
+  area.rangeMin = strToInt(source.getText());
+} //_CODE_:textMinRange:622195:
+
+public void textMaxRange_change(GTextField source, GEvent event) { //_CODE_:textMaxRange:792646:
+  area.rangeMax = strToInt(source.getText());
+} //_CODE_:textMaxRange:792646:
+
+public void textMinDiam_change(GTextField source, GEvent event) { //_CODE_:textMinDiam:325466:
+  area.diamMin = strToInt(source.getText());
+} //_CODE_:textMinDiam:325466:
+
+public void textMaxDiam_change(GTextField source, GEvent event) { //_CODE_:textMaxDiam:399243:
+  area.diamMax = strToInt(source.getText());
+} //_CODE_:textMaxDiam:399243:
+
+public void textMinRot_change(GTextField source, GEvent event) { //_CODE_:textMinRot:487511:
+  area.rotationMin = strToInt(source.getText());
+} //_CODE_:textMinRot:487511:
+
+public void textMaxRot_change(GTextField source, GEvent event) { //_CODE_:textMaxRot:852320:
+  area.rotationMax = strToInt(source.getText());
+} //_CODE_:textMaxRot:852320:
+
+public void textMinFlow_change(GTextField source, GEvent event) { //_CODE_:textMinFlow:361766:
+  area.flowMin = strToInt(source.getText());
+} //_CODE_:textMinFlow:361766:
+
+public void textMaxFlow_change(GTextField source, GEvent event) { //_CODE_:textMaxFlow:399493:
+  area.flowMax = strToInt(source.getText());
+} //_CODE_:textMaxFlow:399493:
 
 
 
@@ -292,7 +402,7 @@ public void createGUI(){
   GButton.useRoundCorners(false);
   G4P.setDisplayFont("Arial", G4P.PLAIN, 12);
   surface.setTitle("Lost Leaf Editor");
-  panelCreate = new GPanel(this, 472, 64, 64, 176, "Create");
+  panelCreate = new GPanel(this, 8, 328, 64, 160, "Create");
   panelCreate.setCollapsible(false);
   panelCreate.setDraggable(false);
   panelCreate.setText("Create");
@@ -321,6 +431,9 @@ public void createGUI(){
   buttonKiller = new GButton(this, 0, 128, 64, 16);
   buttonKiller.setText("Killer");
   buttonKiller.addEventHandler(this, "buttonKiller_click");
+  buttonArea = new GButton(this, 0, 144, 64, 16);
+  buttonArea.setText("Area");
+  buttonArea.addEventHandler(this, "buttonArea_click");
   panelCreate.addControl(buttonRock);
   panelCreate.addControl(buttonTrunk);
   panelCreate.addControl(buttonFlow);
@@ -329,7 +442,8 @@ public void createGUI(){
   panelCreate.addControl(buttonExit);
   panelCreate.addControl(buttonStar);
   panelCreate.addControl(buttonKiller);
-  panelProperties = new GPanel(this, 3, 24, 136, 288, "Properties");
+  panelCreate.addControl(buttonArea);
+  panelProperties = new GPanel(this, 0, 24, 152, 296, "Properties");
   panelProperties.setCollapsible(false);
   panelProperties.setDraggable(false);
   panelProperties.setText("Properties");
@@ -370,75 +484,75 @@ public void createGUI(){
   labelRot.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   labelRot.setText("Rot");
   labelRot.setOpaque(false);
-  textX = new GTextField(this, 48, 24, 40, 16, G4P.SCROLLBARS_NONE);
+  textX = new GTextField(this, 48, 24, 48, 16, G4P.SCROLLBARS_NONE);
   textX.setOpaque(true);
   textX.addEventHandler(this, "textX_change");
-  textY = new GTextField(this, 88, 24, 40, 16, G4P.SCROLLBARS_NONE);
+  textY = new GTextField(this, 96, 24, 48, 16, G4P.SCROLLBARS_NONE);
   textY.setOpaque(true);
   textY.addEventHandler(this, "textY_change");
-  textFX = new GTextField(this, 48, 152, 40, 16, G4P.SCROLLBARS_NONE);
+  textFX = new GTextField(this, 48, 152, 48, 16, G4P.SCROLLBARS_NONE);
   textFX.setOpaque(true);
   textFX.addEventHandler(this, "textFX_change");
-  textFY = new GTextField(this, 88, 152, 40, 16, G4P.SCROLLBARS_NONE);
+  textFY = new GTextField(this, 96, 152, 48, 16, G4P.SCROLLBARS_NONE);
   textFY.setOpaque(true);
   textFY.addEventHandler(this, "textFY_change");
-  textRange = new GTextField(this, 48, 56, 40, 16, G4P.SCROLLBARS_NONE);
+  textRange = new GTextField(this, 48, 56, 48, 16, G4P.SCROLLBARS_NONE);
   textRange.setOpaque(true);
   textRange.addEventHandler(this, "textRange_change");
-  textVX = new GTextField(this, 48, 40, 40, 16, G4P.SCROLLBARS_NONE);
+  textVX = new GTextField(this, 48, 40, 48, 16, G4P.SCROLLBARS_NONE);
   textVX.setOpaque(true);
   textVX.addEventHandler(this, "textVX_change");
-  textVY = new GTextField(this, 88, 40, 40, 16, G4P.SCROLLBARS_NONE);
+  textVY = new GTextField(this, 96, 40, 48, 16, G4P.SCROLLBARS_NONE);
   textVY.setOpaque(true);
   textVY.addEventHandler(this, "textVY_change");
-  textDiam = new GTextField(this, 48, 72, 40, 16, G4P.SCROLLBARS_NONE);
+  textDiam = new GTextField(this, 48, 72, 48, 16, G4P.SCROLLBARS_NONE);
   textDiam.setOpaque(true);
   textDiam.addEventHandler(this, "textDiam_change");
-  textWid = new GTextField(this, 48, 88, 40, 16, G4P.SCROLLBARS_NONE);
+  textWid = new GTextField(this, 48, 88, 48, 16, G4P.SCROLLBARS_NONE);
   textWid.setOpaque(true);
   textWid.addEventHandler(this, "textWid_change");
-  textHei = new GTextField(this, 88, 88, 40, 16, G4P.SCROLLBARS_NONE);
+  textHei = new GTextField(this, 96, 88, 48, 16, G4P.SCROLLBARS_NONE);
   textHei.setOpaque(true);
   textHei.addEventHandler(this, "textHei_change");
-  textAngle = new GTextField(this, 48, 104, 40, 16, G4P.SCROLLBARS_NONE);
+  textAngle = new GTextField(this, 48, 104, 48, 16, G4P.SCROLLBARS_NONE);
   textAngle.setOpaque(true);
   textAngle.addEventHandler(this, "textAngle_change");
-  textARot = new GTextField(this, 48, 120, 40, 16, G4P.SCROLLBARS_NONE);
+  textARot = new GTextField(this, 48, 120, 48, 16, G4P.SCROLLBARS_NONE);
   textARot.setOpaque(true);
   textARot.addEventHandler(this, "textARot_change");
-  Del = new GButton(this, 72, 240, 56, 16);
-  Del.setText("Delete");
-  Del.addEventHandler(this, "buttonDel_click");
-  cbFollowX = new GCheckbox(this, 0, 168, 80, 16);
+  buttonDel = new GButton(this, 80, 248, 64, 16);
+  buttonDel.setText("Delete");
+  buttonDel.addEventHandler(this, "buttonDel_click");
+  cbFollowX = new GCheckbox(this, 0, 176, 80, 16);
   cbFollowX.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
   cbFollowX.setText("Follow X");
   cbFollowX.setOpaque(false);
   cbFollowX.addEventHandler(this, "cbFollowX_clicked");
-  cbFollowY = new GCheckbox(this, 0, 184, 80, 16);
+  cbFollowY = new GCheckbox(this, 0, 192, 80, 16);
   cbFollowY.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
   cbFollowY.setText("Follow Y");
   cbFollowY.setOpaque(false);
   cbFollowY.addEventHandler(this, "cbFollowY_clicked");
-  buttonColor = new GButton(this, 8, 240, 56, 16);
+  buttonColor = new GButton(this, 8, 248, 64, 16);
   buttonColor.setText("Color");
   buttonColor.addEventHandler(this, "buttonColor_click");
-  cbBounceX = new GCheckbox(this, 0, 200, 80, 16);
+  cbBounceX = new GCheckbox(this, 0, 208, 80, 16);
   cbBounceX.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
   cbBounceX.setText("Bounce X");
   cbBounceX.setOpaque(false);
   cbBounceX.addEventHandler(this, "cbBounceX_clicked");
-  cbBounceY = new GCheckbox(this, 0, 216, 80, 16);
+  cbBounceY = new GCheckbox(this, 0, 224, 80, 16);
   cbBounceY.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
   cbBounceY.setText("Bounce Y");
   cbBounceY.setOpaque(false);
   cbBounceY.addEventHandler(this, "cbBounceY_clicked");
-  buttonMove = new GButton(this, 8, 264, 56, 16);
+  buttonMove = new GButton(this, 8, 272, 64, 16);
   buttonMove.setText("Move");
   buttonMove.addEventHandler(this, "buttonMove_click");
-  buttonClone = new GButton(this, 72, 264, 56, 16);
+  buttonClone = new GButton(this, 80, 272, 64, 16);
   buttonClone.setText("Clone");
   buttonClone.addEventHandler(this, "buttonClone_click");
-  textRot = new GTextField(this, 48, 136, 40, 16, G4P.SCROLLBARS_NONE);
+  textRot = new GTextField(this, 48, 136, 48, 16, G4P.SCROLLBARS_NONE);
   textRot.setOpaque(true);
   textRot.addEventHandler(this, "textRot_change");
   panelProperties.addControl(labelPos);
@@ -462,7 +576,7 @@ public void createGUI(){
   panelProperties.addControl(textHei);
   panelProperties.addControl(textAngle);
   panelProperties.addControl(textARot);
-  panelProperties.addControl(Del);
+  panelProperties.addControl(buttonDel);
   panelProperties.addControl(cbFollowX);
   panelProperties.addControl(cbFollowY);
   panelProperties.addControl(buttonColor);
@@ -471,7 +585,7 @@ public void createGUI(){
   panelProperties.addControl(buttonMove);
   panelProperties.addControl(buttonClone);
   panelProperties.addControl(textRot);
-  panelNew = new GPanel(this, 152, 296, 352, 160, "New Objects");
+  panelNew = new GPanel(this, 464, 264, 352, 160, "New Objects");
   panelNew.setDraggable(false);
   panelNew.setText("New Objects");
   panelNew.setOpaque(true);
@@ -563,7 +677,7 @@ public void createGUI(){
   panelNew.addControl(buttonWhirlColor2);
   panelNew.addControl(buttonTrunkColor1);
   panelNew.addControl(buttonTrunkColor2);
-  panelLevel = new GPanel(this, 152, 24, 288, 216, "Level Properties");
+  panelLevel = new GPanel(this, 528, 24, 288, 216, "Level Properties");
   panelLevel.setDraggable(false);
   panelLevel.setText("Level Properties");
   panelLevel.setOpaque(true);
@@ -619,13 +733,13 @@ public void createGUI(){
   textVictory = new GTextField(this, 80, 96, 40, 16, G4P.SCROLLBARS_NONE);
   textVictory.setText("1");
   textVictory.setOpaque(true);
-  buttonBg = new GButton(this, 8, 120, 96, 16);
+  buttonBg = new GButton(this, 8, 144, 96, 16);
   buttonBg.setText("Background");
   buttonBg.addEventHandler(this, "buttonBg_click");
-  buttonColor1 = new GButton(this, 8, 144, 96, 16);
+  buttonColor1 = new GButton(this, 8, 168, 48, 16);
   buttonColor1.setText("Color 1");
   buttonColor1.addEventHandler(this, "buttonColor1_click");
-  buttonColor2 = new GButton(this, 8, 168, 96, 16);
+  buttonColor2 = new GButton(this, 56, 168, 48, 16);
   buttonColor2.setText("Color 2");
   buttonColor2.addEventHandler(this, "buttonColor2_click");
   buttonControlsColor = new GButton(this, 8, 192, 96, 16);
@@ -691,6 +805,193 @@ public void createGUI(){
   buttonSave = new GButton(this, 128, 0, 56, 18);
   buttonSave.setText("Save");
   buttonSave.addEventHandler(this, "buttonSave_click");
+  panelAreaProperties = new GPanel(this, 152, 24, 152, 352, "Area Properties");
+  panelAreaProperties.setCollapsible(false);
+  panelAreaProperties.setDraggable(false);
+  panelAreaProperties.setText("Area Properties");
+  panelAreaProperties.setOpaque(true);
+  labelAreaPos = new GLabel(this, 0, 24, 48, 16);
+  labelAreaPos.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelAreaPos.setText("Pos");
+  labelAreaPos.setOpaque(false);
+  labelAreaDim = new GLabel(this, 0, 40, 48, 16);
+  labelAreaDim.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelAreaDim.setText("Dim");
+  labelAreaDim.setOpaque(false);
+  labelAreaObjs = new GLabel(this, 0, 80, 48, 16);
+  labelAreaObjs.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelAreaObjs.setText("Objects");
+  labelAreaObjs.setOpaque(false);
+  labelAreaQuant = new GLabel(this, 0, 112, 48, 16);
+  labelAreaQuant.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelAreaQuant.setText("Quant");
+  labelAreaQuant.setOpaque(false);
+  labelAreaSeed = new GLabel(this, 0, 56, 48, 16);
+  labelAreaSeed.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelAreaSeed.setText("Seed");
+  labelAreaSeed.setOpaque(false);
+  labelAreaVX = new GLabel(this, 0, 128, 48, 16);
+  labelAreaVX.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelAreaVX.setText("Vel X");
+  labelAreaVX.setOpaque(false);
+  labelAreaVY = new GLabel(this, 0, 144, 48, 16);
+  labelAreaVY.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelAreaVY.setText("Vel Y");
+  labelAreaVY.setOpaque(false);
+  labelAreaMin = new GLabel(this, 48, 96, 48, 16);
+  labelAreaMin.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelAreaMin.setText("Min");
+  labelAreaMin.setOpaque(false);
+  labelAreaMax = new GLabel(this, 96, 96, 48, 16);
+  labelAreaMax.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelAreaMax.setText("Max");
+  labelAreaMax.setOpaque(false);
+  dropListObj = new GDropList(this, 48, 80, 96, 80, 4, 10);
+  dropListObj.setItems(loadStrings("list_859383"), 0);
+  dropListObj.addEventHandler(this, "dropListObj_click");
+  textMinQuant = new GTextField(this, 48, 112, 48, 16, G4P.SCROLLBARS_NONE);
+  textMinQuant.setOpaque(true);
+  textMinQuant.addEventHandler(this, "textMinQuant_change");
+  textMaxQuant = new GTextField(this, 96, 112, 48, 16, G4P.SCROLLBARS_NONE);
+  textMaxQuant.setOpaque(true);
+  textMaxQuant.addEventHandler(this, "textMaxQuant_change");
+  textMinVX = new GTextField(this, 48, 128, 48, 16, G4P.SCROLLBARS_NONE);
+  textMinVX.setOpaque(true);
+  textMinVX.addEventHandler(this, "textMinVX_change");
+  textMaxVX = new GTextField(this, 96, 128, 48, 16, G4P.SCROLLBARS_NONE);
+  textMaxVX.setOpaque(true);
+  textMaxVX.addEventHandler(this, "textMaxVX_change");
+  textMinVY = new GTextField(this, 48, 144, 48, 16, G4P.SCROLLBARS_NONE);
+  textMinVY.setOpaque(true);
+  textMinVY.addEventHandler(this, "textMinVY_change");
+  textMaxVY = new GTextField(this, 96, 144, 48, 16, G4P.SCROLLBARS_NONE);
+  textMaxVY.setOpaque(true);
+  textMaxVY.addEventHandler(this, "textMaxVY_change");
+  buttonAreaColor1 = new GButton(this, 8, 304, 32, 16);
+  buttonAreaColor1.setText("C 1");
+  buttonAreaColor1.addEventHandler(this, "buttonAreaColor1_click");
+  buttonAreaColor2 = new GButton(this, 40, 304, 32, 16);
+  buttonAreaColor2.setText("C 2");
+  buttonAreaColor2.addEventHandler(this, "buttonAreaColor2_click");
+  textAreaX = new GTextField(this, 48, 24, 48, 16, G4P.SCROLLBARS_NONE);
+  textAreaX.setOpaque(true);
+  textAreaX.addEventHandler(this, "textAreaX_change");
+  textAreaY = new GTextField(this, 96, 24, 48, 16, G4P.SCROLLBARS_NONE);
+  textAreaY.setOpaque(true);
+  textAreaY.addEventHandler(this, "textAreaY_change");
+  textAreaWid = new GTextField(this, 48, 40, 48, 16, G4P.SCROLLBARS_NONE);
+  textAreaWid.setOpaque(true);
+  textAreaWid.addEventHandler(this, "textAreaWid_change");
+  textAreaHei = new GTextField(this, 96, 40, 48, 16, G4P.SCROLLBARS_NONE);
+  textAreaHei.setOpaque(true);
+  textAreaHei.addEventHandler(this, "textAreaHei_change");
+  textAreaSeed = new GTextField(this, 48, 56, 48, 16, G4P.SCROLLBARS_NONE);
+  textAreaSeed.setOpaque(true);
+  textAreaSeed.addEventHandler(this, "textAreaSeed_change");
+  labelAreaDiam = new GLabel(this, 0, 176, 48, 16);
+  labelAreaDiam.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelAreaDiam.setText("Diam");
+  labelAreaDiam.setOpaque(false);
+  textMinRange = new GTextField(this, 48, 160, 48, 16, G4P.SCROLLBARS_NONE);
+  textMinRange.setOpaque(true);
+  textMinRange.addEventHandler(this, "textMinRange_change");
+  textMaxRange = new GTextField(this, 96, 160, 48, 16, G4P.SCROLLBARS_NONE);
+  textMaxRange.setOpaque(true);
+  textMaxRange.addEventHandler(this, "textMaxRange_change");
+  labelAreaRange = new GLabel(this, 0, 160, 48, 16);
+  labelAreaRange.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelAreaRange.setText("Range");
+  labelAreaRange.setOpaque(false);
+  labelAreaRot = new GLabel(this, 0, 192, 48, 16);
+  labelAreaRot.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelAreaRot.setText("Rot");
+  labelAreaRot.setOpaque(false);
+  labelAreaFlow = new GLabel(this, 0, 208, 48, 16);
+  labelAreaFlow.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelAreaFlow.setText("Flow");
+  labelAreaFlow.setOpaque(false);
+  textMinDiam = new GTextField(this, 48, 176, 48, 16, G4P.SCROLLBARS_NONE);
+  textMinDiam.setOpaque(true);
+  textMinDiam.addEventHandler(this, "textMinDiam_change");
+  textMaxDiam = new GTextField(this, 96, 176, 48, 16, G4P.SCROLLBARS_NONE);
+  textMaxDiam.setOpaque(true);
+  textMaxDiam.addEventHandler(this, "textMaxDiam_change");
+  textMinRot = new GTextField(this, 48, 192, 48, 16, G4P.SCROLLBARS_NONE);
+  textMinRot.setOpaque(true);
+  textMinRot.addEventHandler(this, "textMinRot_change");
+  textMaxRot = new GTextField(this, 96, 192, 48, 16, G4P.SCROLLBARS_NONE);
+  textMaxRot.setOpaque(true);
+  textMaxRot.addEventHandler(this, "textMaxRot_change");
+  textMinFlow = new GTextField(this, 48, 208, 48, 16, G4P.SCROLLBARS_NONE);
+  textMinFlow.setOpaque(true);
+  textMinFlow.addEventHandler(this, "textMinFlow_change");
+  textMaxFlow = new GTextField(this, 96, 208, 48, 16, G4P.SCROLLBARS_NONE);
+  textMaxFlow.setOpaque(true);
+  textMaxFlow.addEventHandler(this, "textMaxFlow_change");
+  buttonAreaDel = new GButton(this, 80, 304, 64, 16);
+  buttonAreaDel.setText("Delete");
+  buttonAreaMove = new GButton(this, 8, 328, 64, 16);
+  buttonAreaMove.setText("Move");
+  buttonAreaClone = new GButton(this, 80, 328, 64, 16);
+  buttonAreaClone.setText("Clone");
+  cbAreaFollowX = new GCheckbox(this, 0, 232, 80, 16);
+  cbAreaFollowX.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
+  cbAreaFollowX.setText("Follow X");
+  cbAreaFollowX.setOpaque(false);
+  cbAreaFollowY = new GCheckbox(this, 0, 248, 80, 16);
+  cbAreaFollowY.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
+  cbAreaFollowY.setText("Follow Y");
+  cbAreaFollowY.setOpaque(false);
+  cbAreaBounceX = new GCheckbox(this, 0, 264, 80, 16);
+  cbAreaBounceX.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
+  cbAreaBounceX.setText("Bounce X");
+  cbAreaBounceX.setOpaque(false);
+  cbAreaBounceY = new GCheckbox(this, 0, 280, 80, 16);
+  cbAreaBounceY.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
+  cbAreaBounceY.setText("Bounce Y");
+  cbAreaBounceY.setOpaque(false);
+  panelAreaProperties.addControl(labelAreaPos);
+  panelAreaProperties.addControl(labelAreaDim);
+  panelAreaProperties.addControl(labelAreaObjs);
+  panelAreaProperties.addControl(labelAreaQuant);
+  panelAreaProperties.addControl(labelAreaSeed);
+  panelAreaProperties.addControl(labelAreaVX);
+  panelAreaProperties.addControl(labelAreaVY);
+  panelAreaProperties.addControl(labelAreaMin);
+  panelAreaProperties.addControl(labelAreaMax);
+  panelAreaProperties.addControl(dropListObj);
+  panelAreaProperties.addControl(textMinQuant);
+  panelAreaProperties.addControl(textMaxQuant);
+  panelAreaProperties.addControl(textMinVX);
+  panelAreaProperties.addControl(textMaxVX);
+  panelAreaProperties.addControl(textMinVY);
+  panelAreaProperties.addControl(textMaxVY);
+  panelAreaProperties.addControl(buttonAreaColor1);
+  panelAreaProperties.addControl(buttonAreaColor2);
+  panelAreaProperties.addControl(textAreaX);
+  panelAreaProperties.addControl(textAreaY);
+  panelAreaProperties.addControl(textAreaWid);
+  panelAreaProperties.addControl(textAreaHei);
+  panelAreaProperties.addControl(textAreaSeed);
+  panelAreaProperties.addControl(labelAreaDiam);
+  panelAreaProperties.addControl(textMinRange);
+  panelAreaProperties.addControl(textMaxRange);
+  panelAreaProperties.addControl(labelAreaRange);
+  panelAreaProperties.addControl(labelAreaRot);
+  panelAreaProperties.addControl(labelAreaFlow);
+  panelAreaProperties.addControl(textMinDiam);
+  panelAreaProperties.addControl(textMaxDiam);
+  panelAreaProperties.addControl(textMinRot);
+  panelAreaProperties.addControl(textMaxRot);
+  panelAreaProperties.addControl(textMinFlow);
+  panelAreaProperties.addControl(textMaxFlow);
+  panelAreaProperties.addControl(buttonAreaDel);
+  panelAreaProperties.addControl(buttonAreaMove);
+  panelAreaProperties.addControl(buttonAreaClone);
+  panelAreaProperties.addControl(cbAreaFollowX);
+  panelAreaProperties.addControl(cbAreaFollowY);
+  panelAreaProperties.addControl(cbAreaBounceX);
+  panelAreaProperties.addControl(cbAreaBounceY);
 }
 
 // Variable declarations 
@@ -704,6 +1005,7 @@ GButton buttonLeaf;
 GButton buttonExit; 
 GButton buttonStar; 
 GButton buttonKiller; 
+GButton buttonArea; 
 GPanel panelProperties; 
 GLabel labelPos; 
 GLabel labelFlow; 
@@ -726,7 +1028,7 @@ GTextField textWid;
 GTextField textHei; 
 GTextField textAngle; 
 GTextField textARot; 
-GButton Del; 
+GButton buttonDel; 
 GCheckbox cbFollowX; 
 GCheckbox cbFollowY; 
 GButton buttonColor; 
@@ -786,3 +1088,46 @@ GTextField textS;
 GButton buttonNew; 
 GSlider sliderScale; 
 GButton buttonSave; 
+GPanel panelAreaProperties; 
+GLabel labelAreaPos; 
+GLabel labelAreaDim; 
+GLabel labelAreaObjs; 
+GLabel labelAreaQuant; 
+GLabel labelAreaSeed; 
+GLabel labelAreaVX; 
+GLabel labelAreaVY; 
+GLabel labelAreaMin; 
+GLabel labelAreaMax; 
+GDropList dropListObj; 
+GTextField textMinQuant; 
+GTextField textMaxQuant; 
+GTextField textMinVX; 
+GTextField textMaxVX; 
+GTextField textMinVY; 
+GTextField textMaxVY; 
+GButton buttonAreaColor1; 
+GButton buttonAreaColor2; 
+GTextField textAreaX; 
+GTextField textAreaY; 
+GTextField textAreaWid; 
+GTextField textAreaHei; 
+GTextField textAreaSeed; 
+GLabel labelAreaDiam; 
+GTextField textMinRange; 
+GTextField textMaxRange; 
+GLabel labelAreaRange; 
+GLabel labelAreaRot; 
+GLabel labelAreaFlow; 
+GTextField textMinDiam; 
+GTextField textMaxDiam; 
+GTextField textMinRot; 
+GTextField textMaxRot; 
+GTextField textMinFlow; 
+GTextField textMaxFlow; 
+GButton buttonAreaDel; 
+GButton buttonAreaMove; 
+GButton buttonAreaClone; 
+GCheckbox cbAreaFollowX; 
+GCheckbox cbAreaFollowY; 
+GCheckbox cbAreaBounceX; 
+GCheckbox cbAreaBounceY; 

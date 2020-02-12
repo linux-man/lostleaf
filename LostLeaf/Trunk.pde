@@ -12,13 +12,13 @@ class Trunk {
     this(p, 50, 50, 0, new PVector(0, 0), 0, false, false, false, false, color(random(min(red(tc1), red(tc2)), max(red(tc1), red(tc2))), random(min(green(tc1), green(tc2)), max(green(tc1), green(tc2))), random(min(blue(tc1), blue(tc2)), max(blue(tc1), blue(tc2))), random(min(alpha(tc1), alpha(tc2)), max(alpha(tc1), alpha(tc2)))));
   }
 
-  Trunk(PVector p, int wi, int he, float a, PVector v, float ar, boolean fx, boolean fy, boolean bx, boolean by, color co) {
+  Trunk(PVector p, int wi, int he, int a, PVector v, int ar, boolean fx, boolean fy, boolean bx, boolean by, color co) {
     pos = p;
     w = wi;
     h = he;
-    angle = a;
+    angle = a * PI / 180;
     vel = v;
-    aRot = ar;
+    aRot = ar * PI / 180;
     followX = fx;
     followY = fy;
     bounceX = bx;

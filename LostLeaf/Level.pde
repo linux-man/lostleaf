@@ -291,10 +291,10 @@ class Level extends State {
           rocks.add(new Rock(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("diam"), new PVector(o.getInt("vx", 0), o.getInt("vy", 0)), o.getBoolean("followx", false), o.getBoolean("followy", false), o.getBoolean("bouncex", false), o.getBoolean("bouncey", false), o.getInt("color", color(255))));
           break;
         case "trunk":
-          trunks.add(new Trunk(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("w"), o.getInt("h"), o.getFloat("angle", 0), new PVector(o.getInt("vx", 0), o.getInt("vy", 0)), o.getFloat("aRot", 0), o.getBoolean("followx", false), o.getBoolean("followy", false), o.getBoolean("bouncex", false), o.getBoolean("bouncey", false), o.getInt("color", color(255))));
+          trunks.add(new Trunk(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("w"), o.getInt("h"), o.getInt("angle", 0), new PVector(o.getInt("vx", 0), o.getInt("vy", 0)), o.getInt("aRot", 0), o.getBoolean("followx", false), o.getBoolean("followy", false), o.getBoolean("bouncex", false), o.getBoolean("bouncey", false), o.getInt("color", color(255))));
           break;
         case "leaf":
-          leafs.add(new Leaf(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("color", color(255))));
+          leafs.add(new Leaf(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("diam", 40), o.getInt("color", color(255))));
           break;
         case "exit":
           exits.add(new Exit(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("range", defaultRange), o.getInt("color", color(255, 0))));
@@ -302,10 +302,54 @@ class Level extends State {
         case "star":
           stars.add(new Star(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("diam"), new PVector(o.getInt("vx", 0), o.getInt("vy", 0)), o.getBoolean("followx", false), o.getBoolean("followy", false), o.getBoolean("bouncex", false), o.getBoolean("bouncey", false), o.getInt("color", color(255))));
           break;
-         case "killer":
+        case "killer":
           killers.add(new Killer(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("diam"), new PVector(o.getInt("vx", 0), o.getInt("vy", 0)), o.getBoolean("followx", false), o.getBoolean("followy", false), o.getBoolean("bouncex", false), o.getBoolean("bouncey", false), o.getInt("color", color(255))));
           break;
-     }
+        case "area":
+          if(o.getInt("seed") >= 0) randomSeed(o.getInt("seed")); else randomSeed(millis());
+          int q = int(random(o.getInt("quantmin"), o.getInt("quantmax") + 1));
+          switch(o.getInt("object")) {
+            case 0: //Rocks
+              for(int m = 0; m < q; m++) rocks.add(new Rock(
+              new PVector(int(random(o.getInt("x") - o.getInt("w") / 2, o.getInt("x") + 1 + o.getInt("w") / 2)), int(random(o.getInt("y") - o.getInt("h") / 2, o.getInt("y") + 1 + o.getInt("h") / 2))), 
+              int(random(o.getInt("diammin"), o.getInt("diammax") + 1)),
+              new PVector(int(random(o.getInt("vxmin", 0), o.getInt("vxmax", 0) + 1)), int(random(o.getInt("vymin", 0), o.getInt("vymax", 0) + 1))),
+              o.getBoolean("followx", false), o.getBoolean("followy", false), o.getBoolean("bouncex", false), o.getBoolean("bouncey", false),
+              color(int(random(red(o.getInt("color1", color(255))), red(o.getInt("color2", color(255))))), int(random(green(o.getInt("color1", color(255))), green(o.getInt("color2", color(255))))), int(random(blue(o.getInt("color1", color(255))), blue(o.getInt("color2", color(255))))))
+              ));          
+              break;
+            case 1: //Whirls
+              for(int m = 0; m < q; m++) whirls.add(new Whirl(
+              new PVector(int(random(o.getInt("x") - o.getInt("w") / 2, o.getInt("x") + 1 + o.getInt("w") / 2)), int(random(o.getInt("y") - o.getInt("h") / 2, o.getInt("y") + 1 + o.getInt("h") / 2))), 
+              int(random(o.getInt("flowmin"), o.getInt("flowmax") + 1)),
+              int(random(o.getInt("rotationmin"), o.getInt("rotationmax") + 1)),
+              int(random(o.getInt("rangemin", defaultRange), o.getInt("rangemax", defaultRange) + 1)),
+              new PVector(int(random(o.getInt("vxmin", 0), o.getInt("vxmax", 0) + 1)), int(random(o.getInt("vymin", 0), o.getInt("vymax", 0) + 1))),
+              o.getBoolean("followx", false), o.getBoolean("followy", false), o.getBoolean("bouncex", false), o.getBoolean("bouncey", false),
+              color(int(random(red(o.getInt("color1", color(255))), red(o.getInt("color2", color(255))))), int(random(green(o.getInt("color1", color(255))), green(o.getInt("color2", color(255))))), int(random(blue(o.getInt("color1", color(255))), blue(o.getInt("color2", color(255))))))
+              ));          
+              break;
+            case 2: //Stars
+              for(int m = 0; m < q; m++) stars.add(new Star(
+              new PVector(int(random(o.getInt("x") - o.getInt("w") / 2, o.getInt("x") + 1 + o.getInt("w") / 2)), int(random(o.getInt("y") - o.getInt("h") / 2, o.getInt("y") + 1 + o.getInt("h") / 2))), 
+              int(random(o.getInt("diammin"), o.getInt("diammax") + 1)),
+              new PVector(int(random(o.getInt("vxmin", 0), o.getInt("vxmax", 0) + 1)), int(random(o.getInt("vymin", 0), o.getInt("vymax", 0) + 1))),
+              o.getBoolean("followx", false), o.getBoolean("followy", false), o.getBoolean("bouncex", false), o.getBoolean("bouncey", false),
+              color(int(random(red(o.getInt("color1", color(255))), red(o.getInt("color2", color(255))))), int(random(green(o.getInt("color1", color(255))), green(o.getInt("color2", color(255))))), int(random(blue(o.getInt("color1", color(255))), blue(o.getInt("color2", color(255))))))
+              ));          
+              break;
+            case 3: //Killers
+              for(int m = 0; m < q; m++) killers.add(new Killer(
+              new PVector(int(random(o.getInt("x") - o.getInt("w") / 2, o.getInt("x") + 1 + o.getInt("w") / 2)), int(random(o.getInt("y") - o.getInt("h") / 2, o.getInt("y") + 1 + o.getInt("h") / 2))), 
+              int(random(o.getInt("diammin"), o.getInt("diammax") + 1)),
+              new PVector(int(random(o.getInt("vxmin", 0), o.getInt("vxmax", 0) + 1)), int(random(o.getInt("vymin", 0), o.getInt("vymax", 0) + 1))),
+              o.getBoolean("followx", false), o.getBoolean("followy", false), o.getBoolean("bouncex", false), o.getBoolean("bouncey", false),
+              color(int(random(red(o.getInt("color1", color(255))), red(o.getInt("color2", color(255))))), int(random(green(o.getInt("color1", color(255))), green(o.getInt("color2", color(255))))), int(random(blue(o.getInt("color1", color(255))), blue(o.getInt("color2", color(255))))))
+              ));          
+              break;
+          }
+          break;
+      }
     }
   }
 

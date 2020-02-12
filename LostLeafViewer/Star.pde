@@ -2,6 +2,8 @@ class Star extends Obstacle {
   color c;
   boolean catched;
 
+  int m;
+
   Star(PVector p, int d, PVector v, boolean fx, boolean fy, boolean bx, boolean by, color co) {
     super(p, d, v, fx, fy, bx, by);
     c = co;
@@ -10,7 +12,7 @@ class Star extends Obstacle {
 
   void update() {
     super.update();
-    int m = millis();
+    m = millis();
     stroke(c);
     translate((int)(pos.x - center.x), (int)(pos.y - center.y));
     rotate(m / 1200.0);

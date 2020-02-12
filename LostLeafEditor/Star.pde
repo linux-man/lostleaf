@@ -4,6 +4,8 @@ class Star {
   boolean followX, followY, bounceX, bounceY;
   color c;
 
+  int m;
+
   Star(PVector p) {
     this(p, 50, new PVector(0, 0), false, false, false, false, color(255));
   }
@@ -20,7 +22,7 @@ class Star {
   }
 
   void update() {
-    int m = millis();
+    m = millis();
     noFill();
     strokeWeight(6);
     stroke(c);
