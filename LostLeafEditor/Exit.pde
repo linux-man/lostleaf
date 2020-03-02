@@ -2,15 +2,18 @@ class Exit {
   PVector pos;
   int range;
   color c;
+  boolean save;
+  
  
   Exit(PVector p) {
-    this(p, 200, color(255, 0));
+    this(p, 200, color(255, 0), true);
   }
 
-  Exit(PVector p, int r, color co) {
+  Exit(PVector p, int r, color co, boolean s) {
     pos = p;
     range = r;
     c = co;
+    save = s;
   }
 
   void update() {

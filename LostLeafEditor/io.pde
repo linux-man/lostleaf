@@ -17,6 +17,7 @@ void loadLevel(File file) {
     cbTiltY.setSelected(json.getBoolean("tilty", false));
     textMaxTilt.setText(intToStr(json.getInt("maxtilt", 50)));
     textVictory.setText(intToStr(json.getInt("victory", 1)));
+    textTimer.setText(intToStr(json.getInt("timer", 0)));
     textPoints.setText(intToStr(json.getInt("points", 0)));
     textIntro.setText(json.getString("intro",""));
     c1 = json.getInt("color1", color(255, 32));
@@ -53,10 +54,10 @@ void loadLevel(File file) {
           trunks.add(new Trunk(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("w"), o.getInt("h"), o.getInt("angle", 0), new PVector(o.getInt("vx", 0), o.getInt("vy", 0)), o.getInt("aRot", 0), o.getBoolean("followx", false), o.getBoolean("followy", false), o.getBoolean("bouncex", false), o.getBoolean("bouncey", false), o.getInt("color", color(255))));
           break;
         case "leaf":
-          leafs.add(new Leaf(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("diam", 40), o.getInt("color", color(255))));
+          leafs.add(new Leaf(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("diam", 40), o.getInt("color", color(255)), o.getBoolean("primary", false)));
           break;
         case "exit":
-          exits.add(new Exit(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("range", defaultRange), o.getInt("color", color(255, 0))));
+          exits.add(new Exit(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("range", defaultRange), o.getInt("color", color(255, 0)), o.getBoolean("save", true)));
           break;
         case "star":
           stars.add(new Star(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("diam"), new PVector(o.getInt("vx", 0), o.getInt("vy", 0)), o.getBoolean("followx", false), o.getBoolean("followy", false), o.getBoolean("bouncex", false), o.getBoolean("bouncey", false), o.getInt("color", color(255))));
@@ -93,6 +94,7 @@ void saveLevel(File file) {
     if(cbTiltY.isSelected()) json.setBoolean("tilty", true);
     if(strToInt(textMaxTilt.getText()) != 50) json.setInt("maxtilt", strToInt(textMaxTilt.getText()));
     if(strToInt(textVictory.getText()) > 1) json.setInt("victory", strToInt(textVictory.getText()));
+    if(strToInt(textTimer.getText()) > 0) json.setInt("timer", strToInt(textTimer.getText()));println(textTimer.getText());
     if(strToInt(textPoints.getText()) > 0) json.setInt("points", strToInt(textPoints.getText()));
     if(!textIntro.getText().equals("")) json.setString("intro",textIntro.getText());
     if(c1 != color(255, 32)) json.setInt("color1", c1);
@@ -172,6 +174,7 @@ void saveLevel(File file) {
       jsonNode.setInt("x", (int)o.pos.x); jsonNode.setInt("y", (int)o.pos.y);
       if(o.diam != 40) jsonNode.setInt("diam", o.diam);
       if(o.c != color(255)) jsonNode.setInt("color", o.c);
+      if(o.primary) jsonNode.setBoolean("primary", true);
       jsonNodes.setJSONObject(jsonNodes.size(), jsonNode);
     }
     for(Exit o: exits) {
@@ -180,6 +183,7 @@ void saveLevel(File file) {
       jsonNode.setInt("x", (int)o.pos.x); jsonNode.setInt("y", (int)o.pos.y);
       if(o.range != defaultRange) jsonNode.setInt("range", o.range);
       if(o.c != color(255, 0)) jsonNode.setInt("color", o.c);
+      if(o.save == false) jsonNode.setBoolean("save", false);
       jsonNodes.setJSONObject(jsonNodes.size(), jsonNode);
     }
     for(Star o: stars) {

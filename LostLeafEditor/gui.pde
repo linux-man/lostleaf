@@ -223,6 +223,12 @@ public void textRot_change(GTextField source, GEvent event) { //_CODE_:textRot:8
   if(whirl != null) whirl.rotation = strToInt(source.getText());
 } //_CODE_:textRot:879048:
 
+public void cbPrimaryLeaf_clicked(GCheckbox source, GEvent event) { //_CODE_:cbPrimaryLeaf:748482:
+  boolean s = source.isSelected();
+  if(leaf != null) leaf.primary = s;
+  else if(exit != null) exit.save = s;
+} //_CODE_:cbPrimaryLeaf:748482:
+
 public void panelNew_click(GPanel source, GEvent event) { //_CODE_:panelNew:509105:
   panelLevel.setCollapsed(true);
 } //_CODE_:panelNew:509105:
@@ -282,6 +288,7 @@ public void buttonSaveAs_click(GButton source, GEvent event) { //_CODE_:buttonSa
 public void buttonNew_click(GButton source, GEvent event) { //_CODE_:buttonNew:671950:
   level = null;
   clearNodes();
+  
   center.set(450, -height / 2);
   textW.setText("900");
   textH.setText("1600");
@@ -402,7 +409,7 @@ public void createGUI(){
   GButton.useRoundCorners(false);
   G4P.setDisplayFont("Arial", G4P.PLAIN, 12);
   surface.setTitle("Lost Leaf Editor");
-  panelCreate = new GPanel(this, 8, 328, 64, 160, "Create");
+  panelCreate = new GPanel(this, 400, 40, 64, 160, "Create");
   panelCreate.setCollapsible(false);
   panelCreate.setDraggable(false);
   panelCreate.setText("Create");
@@ -443,7 +450,7 @@ public void createGUI(){
   panelCreate.addControl(buttonStar);
   panelCreate.addControl(buttonKiller);
   panelCreate.addControl(buttonArea);
-  panelProperties = new GPanel(this, 0, 24, 152, 296, "Properties");
+  panelProperties = new GPanel(this, 0, 24, 152, 312, "Properties");
   panelProperties.setCollapsible(false);
   panelProperties.setDraggable(false);
   panelProperties.setText("Properties");
@@ -520,41 +527,46 @@ public void createGUI(){
   textARot = new GTextField(this, 48, 120, 48, 16, G4P.SCROLLBARS_NONE);
   textARot.setOpaque(true);
   textARot.addEventHandler(this, "textARot_change");
-  buttonDel = new GButton(this, 80, 248, 64, 16);
+  buttonDel = new GButton(this, 80, 264, 64, 16);
   buttonDel.setText("Delete");
   buttonDel.addEventHandler(this, "buttonDel_click");
-  cbFollowX = new GCheckbox(this, 0, 176, 80, 16);
+  cbFollowX = new GCheckbox(this, 0, 192, 80, 16);
   cbFollowX.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
   cbFollowX.setText("Follow X");
   cbFollowX.setOpaque(false);
   cbFollowX.addEventHandler(this, "cbFollowX_clicked");
-  cbFollowY = new GCheckbox(this, 0, 192, 80, 16);
+  cbFollowY = new GCheckbox(this, 0, 208, 80, 16);
   cbFollowY.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
   cbFollowY.setText("Follow Y");
   cbFollowY.setOpaque(false);
   cbFollowY.addEventHandler(this, "cbFollowY_clicked");
-  buttonColor = new GButton(this, 8, 248, 64, 16);
+  buttonColor = new GButton(this, 8, 264, 64, 16);
   buttonColor.setText("Color");
   buttonColor.addEventHandler(this, "buttonColor_click");
-  cbBounceX = new GCheckbox(this, 0, 208, 80, 16);
+  cbBounceX = new GCheckbox(this, 0, 224, 80, 16);
   cbBounceX.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
   cbBounceX.setText("Bounce X");
   cbBounceX.setOpaque(false);
   cbBounceX.addEventHandler(this, "cbBounceX_clicked");
-  cbBounceY = new GCheckbox(this, 0, 224, 80, 16);
+  cbBounceY = new GCheckbox(this, 0, 240, 80, 16);
   cbBounceY.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
   cbBounceY.setText("Bounce Y");
   cbBounceY.setOpaque(false);
   cbBounceY.addEventHandler(this, "cbBounceY_clicked");
-  buttonMove = new GButton(this, 8, 272, 64, 16);
+  buttonMove = new GButton(this, 8, 288, 64, 16);
   buttonMove.setText("Move");
   buttonMove.addEventHandler(this, "buttonMove_click");
-  buttonClone = new GButton(this, 80, 272, 64, 16);
+  buttonClone = new GButton(this, 80, 288, 64, 16);
   buttonClone.setText("Clone");
   buttonClone.addEventHandler(this, "buttonClone_click");
   textRot = new GTextField(this, 48, 136, 48, 16, G4P.SCROLLBARS_NONE);
   textRot.setOpaque(true);
   textRot.addEventHandler(this, "textRot_change");
+  cbPrimaryLeaf = new GCheckbox(this, 0, 176, 80, 16);
+  cbPrimaryLeaf.setIconAlign(GAlign.LEFT, GAlign.MIDDLE);
+  cbPrimaryLeaf.setText("Primary");
+  cbPrimaryLeaf.setOpaque(false);
+  cbPrimaryLeaf.addEventHandler(this, "cbPrimaryLeaf_clicked");
   panelProperties.addControl(labelPos);
   panelProperties.addControl(labelFlow);
   panelProperties.addControl(labelRange);
@@ -585,6 +597,7 @@ public void createGUI(){
   panelProperties.addControl(buttonMove);
   panelProperties.addControl(buttonClone);
   panelProperties.addControl(textRot);
+  panelProperties.addControl(cbPrimaryLeaf);
   panelNew = new GPanel(this, 464, 264, 352, 160, "New Objects");
   panelNew.setDraggable(false);
   panelNew.setText("New Objects");
@@ -677,7 +690,7 @@ public void createGUI(){
   panelNew.addControl(buttonWhirlColor2);
   panelNew.addControl(buttonTrunkColor1);
   panelNew.addControl(buttonTrunkColor2);
-  panelLevel = new GPanel(this, 528, 24, 288, 216, "Level Properties");
+  panelLevel = new GPanel(this, 528, 24, 288, 224, "Level Properties");
   panelLevel.setDraggable(false);
   panelLevel.setText("Level Properties");
   panelLevel.setOpaque(true);
@@ -733,23 +746,23 @@ public void createGUI(){
   textVictory = new GTextField(this, 80, 96, 40, 16, G4P.SCROLLBARS_NONE);
   textVictory.setText("1");
   textVictory.setOpaque(true);
-  buttonBg = new GButton(this, 8, 144, 96, 16);
+  buttonBg = new GButton(this, 8, 152, 96, 16);
   buttonBg.setText("Background");
   buttonBg.addEventHandler(this, "buttonBg_click");
-  buttonColor1 = new GButton(this, 8, 168, 48, 16);
+  buttonColor1 = new GButton(this, 8, 176, 48, 16);
   buttonColor1.setText("Color 1");
   buttonColor1.addEventHandler(this, "buttonColor1_click");
-  buttonColor2 = new GButton(this, 56, 168, 48, 16);
+  buttonColor2 = new GButton(this, 56, 176, 48, 16);
   buttonColor2.setText("Color 2");
   buttonColor2.addEventHandler(this, "buttonColor2_click");
-  buttonControlsColor = new GButton(this, 8, 192, 96, 16);
+  buttonControlsColor = new GButton(this, 8, 200, 96, 16);
   buttonControlsColor.setText("Controls Color");
   buttonControlsColor.addEventHandler(this, "buttonControlsColor_click");
-  labelIntroText = new GLabel(this, 160, 120, 80, 16);
+  labelIntroText = new GLabel(this, 160, 128, 80, 16);
   labelIntroText.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
   labelIntroText.setText("Intro Text");
   labelIntroText.setOpaque(false);
-  textIntro = new GTextArea(this, 112, 136, 168, 72, G4P.SCROLLBARS_NONE);
+  textIntro = new GTextArea(this, 112, 144, 168, 72, G4P.SCROLLBARS_NONE);
   textIntro.setOpaque(true);
   labelLevelStars = new GLabel(this, 160, 96, 80, 16);
   labelLevelStars.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
@@ -758,6 +771,12 @@ public void createGUI(){
   textPoints = new GTextField(this, 240, 96, 40, 16, G4P.SCROLLBARS_NONE);
   textPoints.setText("0");
   textPoints.setOpaque(true);
+  labelTimer = new GLabel(this, 0, 120, 80, 16);
+  labelTimer.setTextAlign(GAlign.CENTER, GAlign.MIDDLE);
+  labelTimer.setText("Timer");
+  labelTimer.setOpaque(false);
+  textTimer = new GTextField(this, 80, 120, 40, 16, G4P.SCROLLBARS_NONE);
+  textTimer.setOpaque(true);
   panelLevel.addControl(labelLevelDim);
   panelLevel.addControl(textW);
   panelLevel.addControl(textH);
@@ -780,6 +799,8 @@ public void createGUI(){
   panelLevel.addControl(textIntro);
   panelLevel.addControl(labelLevelStars);
   panelLevel.addControl(textPoints);
+  panelLevel.addControl(labelTimer);
+  panelLevel.addControl(textTimer);
   buttonLoad = new GButton(this, 64, 0, 56, 18);
   buttonLoad.setText("Load");
   buttonLoad.addEventHandler(this, "buttonLoad_click");
@@ -1037,6 +1058,7 @@ GCheckbox cbBounceY;
 GButton buttonMove; 
 GButton buttonClone; 
 GTextField textRot; 
+GCheckbox cbPrimaryLeaf; 
 GPanel panelNew; 
 GLabel labelNewRocks; 
 GLabel labelNewTrunks; 
@@ -1081,6 +1103,8 @@ GLabel labelIntroText;
 GTextArea textIntro; 
 GLabel labelLevelStars; 
 GTextField textPoints; 
+GLabel labelTimer; 
+GTextField textTimer; 
 GButton buttonLoad; 
 GButton buttonSaveAs; 
 GCheckbox cbSnap; 

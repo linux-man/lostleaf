@@ -53,7 +53,10 @@ class Leaf {
       if(crunched > 1) sucked = true;
 
       for(Exit o: exits) {
-        if(pos.dist(o.pos) < o.range) saved = true;
+        if(pos.dist(o.pos) < o.range) {
+          if(o.save) saved = true;
+          else sucked = true;
+        }
       }
 
       for(Star o: stars) {

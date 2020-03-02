@@ -7,8 +7,8 @@ class Level extends State {
   PFont font;
 
   int nLeafs, savedLeafs, starPoints, newRockNum, newTrunkNum, newWhirlNum, newRockMax, newTrunkMax, newWhirlMaxRot, newWhirlMaxFlow;
-  boolean begin, end, overRestart, overRock, overTrunk, overWhirl, newRock, newTrunk, newWhirl, posRock, posTrunk, posWhirl;
-  float fade;
+  boolean begin, end, overRestart, overRock, overTrunk, overWhirl, newRock, newTrunk, newWhirl, posRock, posTrunk, posWhirl, hasTimer;
+  float fade, timer;
   String link;
 
   Level(String l) {
@@ -39,13 +39,14 @@ class Level extends State {
 
   void draw() {
     if(posRock || posTrunk || posWhirl) dt = 0;
+    if(hasTimer) timer -= dt;
 
     //Tilt
     flows.get(0).flow.set(tilt.copy().rotate(rotation + HALF_PI));
 
     //Draw level
     nLeafs = leafs.size();
-    if(nLeafs == 0 || savedLeafs >= victory || (points > 0 && starPoints >= points)) end = true;
+    if(nLeafs == 0 || savedLeafs >= victory || (points > 0 && starPoints >= points) || (hasTimer && timer < 0)) end = true;
     fCenter();
     translate(width / 2, height / 2);
     if(rotate) fRotate();
@@ -82,6 +83,10 @@ class Level extends State {
     translate(-width / 2, -height / 2);
 
     //Controls
+    if(hasTimer) {
+      fill(cc);
+      text(int(timer), width / 5, height / 10);
+    }
     if(points > 0) {
       fill(cc);
       text(points, width / 2, height / 10);
@@ -216,16 +221,10 @@ class Level extends State {
     switch(nLeafs) {
       case 0:
         break;
-      case 1:
-        center.set(leafs.get(0).pos);
-        break;
       default:
-        PVector median = new PVector(0, 0);
-        for(Leaf o: leafs) median.add(o.pos);
-        median.div(leafs.size());
-        PVector sub = PVector.sub(median, center);
+        PVector sub = PVector.sub(leafs.get(0).pos, center);
         if(sub.magSq() > 100) center.add(sub.setMag(10));
-        else center.set(median);
+        else center.set(leafs.get(0).pos);
     }
     if(!followX) center.x = levelW / 2;
     if(!followY) center.y = levelH / 2;
@@ -258,6 +257,8 @@ class Level extends State {
     tiltY = json.getBoolean("tilty", false);
     maxTilt = json.getInt("maxtilt", 50);
     victory = json.getInt("victory", 1);
+    timer = json.getInt("timer", 0);
+    hasTimer = (timer > 0);
     points = json.getInt("points", 0);
     intro = json.getString("intro","");
     c1 = json.getInt("color1", color(255, 32));
@@ -294,10 +295,11 @@ class Level extends State {
           trunks.add(new Trunk(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("w"), o.getInt("h"), o.getInt("angle", 0), new PVector(o.getInt("vx", 0), o.getInt("vy", 0)), o.getInt("aRot", 0), o.getBoolean("followx", false), o.getBoolean("followy", false), o.getBoolean("bouncex", false), o.getBoolean("bouncey", false), o.getInt("color", color(255))));
           break;
         case "leaf":
-          leafs.add(new Leaf(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("diam", 40), o.getInt("color", color(255))));
+          if(o.getBoolean("primary", false)) leafs.add(0, new Leaf(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("diam", 40), o.getInt("color", color(255))));
+          else leafs.add(new Leaf(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("diam", 40), o.getInt("color", color(255))));
           break;
         case "exit":
-          exits.add(new Exit(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("range", defaultRange), o.getInt("color", color(255, 0))));
+          exits.add(new Exit(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("range", defaultRange), o.getInt("color", color(255, 0)), o.getBoolean("save", true)));
           break;
         case "star":
           stars.add(new Star(new PVector(o.getInt("x"), o.getInt("y")), o.getInt("diam"), new PVector(o.getInt("vx", 0), o.getInt("vy", 0)), o.getBoolean("followx", false), o.getBoolean("followy", false), o.getBoolean("bouncex", false), o.getBoolean("bouncey", false), o.getInt("color", color(255))));

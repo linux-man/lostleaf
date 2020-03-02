@@ -1,6 +1,6 @@
 class Intro extends State {
   String link, intro;
-  int victory, points, newRockNum, newTrunkNum, newWhirlNum;
+  int victory, points, newRockNum, newTrunkNum, newWhirlNum, timer;
   float fade;
   boolean begin, end;
   PFont font1, font2;
@@ -26,6 +26,7 @@ class Intro extends State {
     String conditions = "";
     if(victory > 1) conditions += "Save " + victory + " leafs\n";
     if(points > 0) conditions += "Catch " + points + " stars\n";
+    if(timer > 0) conditions += "You have " + timer + " seconds\n";
     if(newRockNum + newTrunkNum + newWhirlNum > 0) conditions += "You have ";
     if(newRockNum > 0) conditions += newRockNum + ((newRockNum == 1) ? " rock" : " rocks");
     if(newTrunkNum > 0) {
@@ -62,6 +63,7 @@ class Intro extends State {
   void loadLevel(String filename) {
     JSONObject json = loadJSONObject(filename);
     victory = json.getInt("victory", 1);
+    timer = json.getInt("timer", 0);
     points = json.getInt("points", 0);
     intro = json.getString("intro","");
     newRockNum = json.getInt("newrocknum", 0);

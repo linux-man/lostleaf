@@ -153,8 +153,8 @@ void mouseClicked() {
       else if(area != null) area.pos.set(pos);
     }
     else if(clone) {
-      if(exit != null) exits.add(new Exit(pos.copy(), exit.range, exit.c));
-      else if(leaf != null) leafs.add(new Leaf(pos.copy(), leaf.diam, leaf.c));
+      if(exit != null) exits.add(new Exit(pos.copy(), exit.range, exit.c, exit.save));
+      else if(leaf != null) leafs.add(new Leaf(pos.copy(), leaf.diam, leaf.c, leaf.primary));
       else if(whirl != null) whirls.add(new Whirl(pos.copy(), whirl.flow, whirl.rotation, whirl.range, whirl.vel, whirl.followX, whirl.followY, whirl.bounceX, whirl.bounceY, whirl.c));
       else if(flow != null) flows.add(new Flow(pos.copy(), flow.flow, flow.range, flow.vel, flow.followX, flow.followY));
       else if(trunk != null) trunks.add(new Trunk(pos.copy(), trunk.w, trunk.h, trunk.angle, trunk.vel, trunk.aRot, trunk.followX, trunk.followY, trunk.bounceX, trunk.bounceY, trunk.c));
@@ -210,6 +210,7 @@ void mouseClicked() {
       labelFlow.setVisible(true);
       textFX.setVisible(true);
       textFY.setVisible(false);
+      cbPrimaryLeaf.setVisible(false);
       cbFollowX.setVisible(true);
       cbFollowY.setVisible(true);
       cbBounceX.setVisible(true);
@@ -248,6 +249,7 @@ void mouseClicked() {
       labelFlow.setVisible(true);
       textFX.setVisible(true);
       textFY.setVisible(true);
+      cbPrimaryLeaf.setVisible(false);
       cbFollowX.setVisible(true);
       cbFollowY.setVisible(true);
       cbBounceX.setVisible(false);
@@ -304,6 +306,7 @@ void mouseClicked() {
       labelFlow.setVisible(false);
       textFX.setVisible(false);
       textFY.setVisible(false);
+      cbPrimaryLeaf.setVisible(false);
       cbFollowX.setVisible(true);
       cbFollowY.setVisible(true);
       cbBounceX.setVisible(true);
@@ -336,6 +339,8 @@ void mouseClicked() {
       labelFlow.setVisible(false);
       textFX.setVisible(false);
       textFY.setVisible(false);
+      cbPrimaryLeaf.setText("Primary");
+      cbPrimaryLeaf.setVisible(true);
       cbFollowX.setVisible(false);
       cbFollowY.setVisible(false);
       cbBounceX.setVisible(false);
@@ -349,6 +354,7 @@ void mouseClicked() {
       textX.setText(intToStr(exit.pos.x));
       textY.setText(intToStr(exit.pos.y));
       textRange.setText(intToStr(exit.range));
+      cbPrimaryLeaf.setSelected(exit.save);
       labelVel.setVisible(false);
       textVX.setVisible(false);
       textVY.setVisible(false);
@@ -368,6 +374,8 @@ void mouseClicked() {
       labelFlow.setVisible(false);
       textFX.setVisible(false);
       textFY.setVisible(false);
+      cbPrimaryLeaf.setText("Save");
+      cbPrimaryLeaf.setVisible(true);
       cbFollowX.setVisible(false);
       cbFollowY.setVisible(false);
       cbBounceX.setVisible(false);

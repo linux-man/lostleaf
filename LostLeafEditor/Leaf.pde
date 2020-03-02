@@ -2,15 +2,17 @@ class Leaf {
   PVector pos;
   int diam;
   color c;
+  boolean primary;
 
   Leaf(PVector p) {
-    this(p, 40, color(255));
+    this(p, 40, color(255), false);
   }
 
-  Leaf(PVector p, int d, color co) {
+  Leaf(PVector p, int d, color co, boolean pri) {
     pos = p;
     c = co;
     diam = d;
+    primary = pri;
   }
 
   void update() {

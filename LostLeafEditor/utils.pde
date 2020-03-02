@@ -1,5 +1,5 @@
 boolean overGUI() {
-  return (mouseY < 40) || (panelProperties.isVisible() && mouseX < 152 && mouseY < 320) || (panelAreaProperties.isVisible() && mouseX < 152 && mouseY < 376);
+  return (mouseY < 40) || (panelProperties.isVisible() && mouseX < 152 && mouseY < 336) || (panelAreaProperties.isVisible() && mouseX < 152 && mouseY < 376);
 }
 
 void clearNodes() {
@@ -64,6 +64,7 @@ void showHideRKS() {
   labelFlow.setVisible(false);
   textFX.setVisible(false);
   textFY.setVisible(false);
+  cbPrimaryLeaf.setVisible(false);
   cbFollowX.setVisible(true);
   cbFollowY.setVisible(true);
   cbBounceX.setVisible(true);
